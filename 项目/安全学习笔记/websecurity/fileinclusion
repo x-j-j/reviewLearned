@@ -1,0 +1,8 @@
+用户自己选择包含文件时的漏洞
+
+根本原因:程序员对用户上传文件没有限制
+
+直接原因:php.ini中配置了
+allow_url_fopen = on
+allow_url_include = on //这时可以远程调用文件
+

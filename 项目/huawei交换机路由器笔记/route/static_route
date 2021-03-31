@@ -1,0 +1,19 @@
+-----静态路由-----
+ip route-static 192.168.20.0 24 20.0.12.2
+
+前往网段192.168.20.0的下一跳是20.0.12.2
+
+-----默认路由-----   //不成功
+ip route-static 0.0.0.0 10.0.12.2
+
+-----浮动静态路由---- //实现路由备份
+ip route-static 192.168.20.0 24 20.0.12.2 preference 100
+值越小优先级越大
+dis ip routing-table 
+dis ip routing-table protocol static //查看静态路由信息
+
+
+----负载均衡----
+ip route-static 192.168.20.0 24 10.0.12.2
+ip route-static 192.168.20.0 24 10.0.13.3
+通过走不同的路径实现流量均衡

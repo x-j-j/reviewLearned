@@ -1,0 +1,66 @@
+SSH
+
+---SERVER---
+rsa local-key-pair create
+dis local-key-pair public
+user-i v 0 4
+auth aaa
+protocol inbound ssh    //ssh
+
+q
+aaa
+local-user xjj password cipher 1234
+local-user service-type ssh
+q
+ssh user xjj auth password
+stelnet server enable
+
+dis ssh user-info xjj
+
+---CLIENT---
+ssh client first-time enable
+stelnet x.x.x.x
+dis ssh server session
+
+
+
+SFTP
+
+---SERVER---
+aaa
+local-user xjj2 password cipher 1234
+local-user xjj2 service-type ssh
+local-user xjj2 p l 3
+local-usre xjj2 ftp-dirctory flash:/
+
+q
+ssh user xjj2 auth password
+sftp server enable
+dis ssh server status
+
+---CLIENT---
+sftp x.x.x.x
+dis ssh server session
+
+
+
+
+
+
+
+
+
+FTP
+------
+1路由器作为客户端
+连接到ftp服务器(无账号密码)
+2路由器配置成ftp服务器
+sys
+ftp server enable
+aaa
+local-user xjj password cipher 1234 
+local-user xjj ftp-dir flash:/
+local-user xjj service-type ftp
+local-user pri l 15
+3下行客户和路由器交互
+ftpclient有ui

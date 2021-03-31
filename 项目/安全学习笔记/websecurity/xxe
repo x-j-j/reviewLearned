@@ -1,0 +1,3 @@
+xml external entity
+DTD:document type definition容易出问题
+php中simplexml_load_string()将xml转化为SimpleXmlElement对象

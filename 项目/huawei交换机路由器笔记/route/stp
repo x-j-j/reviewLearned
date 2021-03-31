@@ -1,0 +1,37 @@
+---stp---
+启用stp
+stp enable
+stp mode stp
+
+display stp
+都是指定端口(desi)的是根交换机
+
+配置根交换机
+stp priority 0     //默认32768
+stp priority 4096  //默认32768
+或者
+undo stp priority
+stp root priority   //0
+stp root secondary  //4096
+路经开销设置(产生根端口)
+stp cost 2000
+选取指定端口时先根据路径开销，后根据交换机优先级
+
+
+定时器
+stp timer forward-delay 2000   //修改任何配置之后需要2倍的forward-delay时间才能通数据
+stp bridge-diameter 3          //设置网络的直径为3，自动修改计时器的参数，需要修改根交换机
+
+int e0/0/2
+undo shutdown
+
+------rstp------
+stp enable
+stp mode rstp
+
+配置边缘端口来增加转换速度(和终端相连的端口)
+int e0/0/1
+stp edged-port enable
+
+
+------mstp------

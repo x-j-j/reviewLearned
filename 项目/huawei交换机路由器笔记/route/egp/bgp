@@ -1,0 +1,199 @@
+bgp表
+dis bgp peer
+dis bgp routing-table
+
+
+
+
+
+bgp报文类型
+
+open  初相识
+updata 对等体之间交换信息
+notification  出错时发送的
+keepalive   保活
+route-refresh 策略发生变化时触发邻居通告路由
+
+邻居状态机
+idle  尝试tcp建立
+connect  发送tcp包
+active   连接建立不上时反复发送
+opensent  发送open包
+openconfirm  发送keepalive包
+established   发送updata包
+
+
+bgp种类
+ebgp (external bgp)
+as_path 增加自身的as号
+ibgp (internal bgp)
+as_path 不变
+
+
+bgp黑洞问题(ibgp内非直连没有开启bgp转发的功能)
+(鸡肋)使用同步规则(ibgp发送ebgp)处理(igp中存在目的地的地址)  
+(2)import-route bgp 同时进行必要的过滤 
+(3)都运行bgp协议
+(4)mpls
+
+
+ibgp防环
+1.as_path
+2.水平分割规则
+ibgp内,从bgp对等体收到的包不能发给另外的bgp对等体(要形成全网状)
+优化全网状
+(1)路由反射器
+(2)联邦
+
+
+
+基本配置
+bgp 123(as_number)
+router-id 1.1.1.1
+对等体(双方必须匹配)
+peer 10.1.23.3 as-number 123
+peer x.x.x.x connect-interface (loop0)   #和x.x.x.x建立关系，我的更新源地址
+
+
+
+bgp路由通告(引入)
+(1)network(把路由注入到bgp)
+bgp 400
+network 4.4.4.0 24
+dis bgp ro #查看
+peer 10.1.12.1 next-hop-local (ibgp内传递bgp时下一跳修改为自己,默认ebgp变成ibgp时下一跳保持不变)
+
+
+ebgp缺省ttl=1
+修改(双方): peer x.x.x.x ebgp-max-hop 3(缺省255)
+
+
+
+
+bgp路径属性
+
+公认必尊
+(1)AS_PATH
+as_sequence(有序as号队列)
+as_set(无序as号队列)
+(2)origin
+lgp: network引入的路由
+egp: 早期协议
+incomplete: import-route引入的路由
+
+公认自决
+(1)Local_prererence
+as出口向as内通告时调整自己的优先级，影响出口路径(只能传给ibgp对等体)
+dis bgp ro查看
+
+可选非传递
+(1)preferred value: 影响路由的优先级，但是只影响本路由器
+dis bgp ro查看
+
+
+
+
+
+
+
+bgp自动汇总缺省关闭 
+*aggregate*
+detail-suppressed 只通告汇总路由，取消明细
+as-set 继承属性{100,200}等
+suppress-policy 
+origin-policy  配置的路由都没了汇总路由自动就没了
+
+aggregate 172.16.0.0 16 detail-suppressed as-set
+  //通告汇总路由,取消明细,继承属性
+
+ip ip-prefix hehe permit 172.16.2.0 24  #取消172.16.2.0通告
+ip ip-prefix hehe permit 172.16.1.0 24  #取消172.16.1.0通告
+route-policy name permit node 10
+if-match ip-prefix hehe
+aggregate 172.16.0.0 16 as-set detail-suppressed suppress-policy name通告汇总路由,取消部分明细,继承属性
+
+
+
+
+*as-path-filter路由匹配*
+ip as-path-filter 1 deny _600$
+ip as-path-filter 1 permit .*
+bgp 300
+peer 10.1.23.2 as-path-filter 1 import
+
+或者使用route-policy修改路由属性
+
+
+
+
+
+bgp防止环路
+路由反射器(RR)
+peer 3.3.3.3 reflect-client
+联邦
+bgp 64512 (成员as)
+confederation id 345(联邦as)
+peer 1.1.1.1 as 100(传统ebgp)
+peer 4.4.4.4 as 64512(同一联邦内)
+peer 4.4.4.4 con l0
+peer 4.4.4.4 next-hop-local
+
+R4
+confederation id 345
+confederation peer-as 64513(联邦ebgp配置)
+peer 5.5.5.5 ebgp-max-hop(修改ttl)
+
+originator_id是为了防止始发路由器的环路
+cluster_list是防止RR的环路
+reflector cluster-id 44.4.4.4
+
+
+
+
+
+
+
+
+bgp选路规则
+1.
+preferred-value   同一台设备本地权重(不可能在bgp之间传递)
+bgp 345
+peer 5.5.5.5 preferred-value 10
+
+2.
+Local_Preference  同一AS内传递
+apply local-preference 200
+收入的import配置ip-prefix
+发出的export配置
+
+4.AS_Path最短优先
+apply as-path 100 additive(增加as-path长度)
+补充:  
+1.AS_Set{100,200}长度为1
+2.联邦AS_confed_seqq和AS_confed_set类型不参与AS_Path长度计算
+
+
+5.origin
+igp/i(network引入)>egp/e(早期协议)>incomplete/?(import)
+apply origin incomplete
+
+
+6.MED优选最小(同一AS内发出的才会进行比较)
+compare-different-as-med(可以比较不同as的med)
+apply cost 200
+
+
+7.优选ebgp(相对ibgp)
+
+8.优选到hext-hop的最小cost的路由
+int g0/0/0
+ospf cost 10
+
+9.bgp路由分担
+maximum load-nalancing ebgp 2(最大等价路由条数2)
+load-balancing as-path-ignore(忽略不同as)
+
+10.Cluster_List最短
+11.router-id最小
+如果路由携带originator-id(起源的router-id)那么替代router-id
+12.peer-ip地址最小的

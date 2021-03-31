@@ -1,0 +1,15 @@
+静态lsp的建立
+1.(每台设备)
+mpls lsr-id 1.1.1.1
+mpls
+int g0/0/0
+mpls
+int g0/0/1
+mpls
+
+2.配置静态mpls(正反两个方向)
+static-lsp ingress name dest 4.4.4.0 24 nexthop 12.1.1.2 out-label 200
+static-lsp transit name incoming-int g0/0/0 in-label 200 nexthop 23.1.1.13 out-label 300
+static-lsp egress name incoming-int g0/0/0 in-label 400
+
+

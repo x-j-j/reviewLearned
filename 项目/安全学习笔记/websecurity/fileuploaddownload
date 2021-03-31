@@ -1,0 +1,7 @@
+不安全的文件上传下载漏洞
+getimagesize()函数将测定任何 GIF，JPG，PNG，SWF，SWC，PSD，TIFF，BMP，IFF，JP2，JPX，JB2，JPC，XBM 或 WBMP 图像文件的大小并返回图像的尺寸以及文件类型和一个可以用于普通 HTML 文件中 IMG 标记中的 height/width 文本字符串。
+其中png的认定头是8950 4e47
+制作图片木马:windows下copy /b a.png+b.php cccc.png
+
+文件上传漏洞详解
+https://misakikata.github.io/2019/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/

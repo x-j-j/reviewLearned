@@ -1,0 +1,127 @@
+quit            //q
+return          //ret
+system-view     //sys
+display current-configuration            //d cu
+display user-interface                   //d user-i
+
+改名
+sysname
+
+ip地址
+sys
+int g 0/0/0
+ip address 1.1.1.1 24
+
+设置cnsole
+concole接口设置用户级别(0,1,2,3-15)
+sys 
+user-interface concole 0   //user-i con 0
+user privilege level 2     //us p l 2
+authentication-mode password
+set authentication password cipher 1234    //set a p c 1234
+
+
+
+设置vty
+vty设置最大连接数量
+sys
+user-interface maximum-vty 15    //user-i m 15
+
+配置telnet
+password模式
+user authentication password 1234
+//set authentication password cipher 1234
+
+aaa模式
+local-user admin password cipher 123123  //l admin p c 123123
+//admim是用户名password cipher表示密码用蜜文形式保存123123是密码
+local-user admin service-type telnet     //l admin ser tel
+q
+user-interface vty 0 14          //user-i v 1 14
+user privilege level 2           //us p l 2
+authentication-mode aaa          //接入类型为用户名密码验证
+q
+
+
+保存配置
+save file.zip
+自动保存
+autosave interval on
+autosave interval 1440     //24小时保存一次
+autosave interval 00:00:00 //定时保存
+
+startup saved-configuration save.zip  //设置下次启动配置文件
+compare configuration                 //比较当前配置文件与下次启动配置文件
+
+ftp传输
+配置路由器r1和路由器r2
+sys
+sysname r1
+int g 0/0/0
+ip addr 192.168.0.1 24
+
+sys
+sysname r2
+int g 0/0/0
+ip addr 192.168.0.2 24
+
+设置ftp服务器
+ftp server enable
+set default ftp-directory flash:/
+aaa
+local-user xjj password cipher 1234
+local-user xjj service-type ftp
+local-user xjj ftp-dirctory flash:/backup
+local-user xjj privilege level 3
+
+r2登陆r1的ftp
+ftp 192.168.0.1
+xjj
+1234
+get/put vrpcfg.zip
+
+
+
+
+
+配置dhcp
+dis ip pool查看地址池
+
+基于接口地址池的dhcp
+1.dhcp enable
+2.dhcp select int
+
+额外dhcp server excluded-ip-addr 192.168.1.1 192.168.1.10
+额外dhcp server dhs-list 8.8.8.8
+主机dhcp时自动获取dns地址
+
+
+基于全局dhcp的地址池
+dhcp enable
+ip pool name1
+* network 192.168.1.0         #请求ip的主机所在的网段
+* gateway-list 192.168.1.254  #请求ip的主机的路由器的ip地址
+* gateway-list 192.168.1.254 mask 24 #如果是远程需要配置子网掩码
+lease day 2
+excluded-ip-address 192.168.1.250 192.168.1.253
+dns-list 8.8.8.8
+int g0/0/0
+dhcp aelect global
+
+
+
+dhcp中继
+
+单个配置
+dhcp enable
+面向请求ip的主机的接口
+dhcp select relay
+dhcp relay server-ip dhcp服务器地址
+
+dhcp服务器组配置
+dhcp server group name1
+dhcp-server dhcp服务器2地址
+dhcp-server dhcp服务器1地址
+int ///
+dhcp select relay
+dhcp relay server-select name1

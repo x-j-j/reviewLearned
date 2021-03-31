@@ -1,0 +1,206 @@
+AS(自制系统,最大)
+使用同一种协议的一组路由器
+Router ID
+同一AS中标示不同路由器的ID
+LSDB
+存储路由器之间关系的数据库
+
+
+IR(内部路由器)
+ABR(0和其他区之间的域边界路由器)
+BR(边界路由器)
+ASBR(AS边界路由器)
+
+
+OSPF基本配置
+1.router id
+router id 3.3.3.3
+没配置默认用用lookback最大地址
+没配置lookback默认物理接口最大地址
+2.选用ospf
+ospf
+3.area + network
+area 0
+network 10.1.1.1 0.0.0.255
+掩码取反
+4.接口ip
+
+
+邻居
+有接口连接到同一网段
+邻接
+
+
+ospf支持的4网络类型
+ppp
+广播型
+非广播型--多路访问(nbma),点到多点
+atm网络?
+帧中继?
+lapb?
+hdlc?
+
+
+虚连接
+逻辑上使骨干区域连续
+但是逻辑相连的两台设备需要在同一区域内,且一个是骨干ABR
+
+
+端口状态
+loopback
+| unloopback
+down
+| interfaceup
+ptp
+
+
+路由重发步
+1.
+中间的路由器
+假设rip和ospf
+rip
+import-route ospf 1
+q
+ospf 
+import rip
+
+2.
+import direct
+3,
+import-route static
+
+
+
+
+查看lsa种类
+1.(router)dis ospf lsdb router 1.1.1.1
+内部lsa，每个路由器发送
+2.(network)dis ospf lsdb network
+dr发送内部lsa
+3.(sum-net)dis ospf lsdb summary 192.168.1.0    
+abr在area之间发送
+4.(sum-asbr)dis ospf lsdb asbr
+abr发送asbr的位置 
+5.(external)dis ospf lsdb ase
+asbr描述外部区域的信息
+
+
+
+
+减小lsa策略
+1.配置stub，杜绝45类lsa(必须是叶节点)
+ospf 1
+area 1
+stub    (area1中多个设备都要配置)
+
+2.配置totally-stub,杜绝45lsa，并且取消其他area的3类lsa
+ospf 1
+area 1
+stub no-summary   (area1中多个设备都要配置)
+
+3.配置nssa(非完全叶区域):杜绝45类lsa同时可以接入外网，使用7类lsa，传输的时候abr把它转换成5类lsa
+abr下发7类路由表
+ospf 1
+area 1
+nssa   (area1中多个设备都要配置)
+
+4.配置totally-nssa: nssa基础上配置杜绝3类lsa
+abr下发3类路由表
+
+
+
+
+
+其他特性
+                ?#ospf network-type broadcast
+(1)
+路由汇总
+spf 1
+area 2
+
+#abr配置并且只能对本abr直连的区域有效
+abr-summary 192.168.0.0 255.255.248.0       
+abr-summary 192.168.0.0 255.255.248.0 not-advertise  #路由过滤
+
+#asbr配置外部引入的汇总
+import-route direct
+asbr-summary 192.168.0.0 255.255.248.0
+
+
+(2)
+virtual link(area0的一段延伸，解决故障的临时手段)
+把3.3.3.3的设备假设成为abr
+ospf 1
+同一个area
+area 1
+vlink-peer 3.3.3.3    #2.2.2.2的对端
+area 1
+vlink-peer 2.2.2.2    #3.3.3.3的对端
+
+(3)
+路由优先级
+ip-prefix 外部路由
+route-policy 
+if-match ip-prefix
+apply preference 90   #调整优先级为90
+
+ospf 1
+preference ase route-policy  #外部路由优先级修改
+
+
+
+(4)
+Silent-interface(对pc机发送hello包静默掉)
+ospf中的network 可以激活ospf特性，发送hello包
+silent-interface vlanif 20
+
+
+
+(5)
+下发默认路由
+静态的缺省路由 不可以 通过
+ip-route 0.0.0.0 0
+import-route static注入ospf区域
+
+普通区域
+ip route-static 0.0.0.0 0.0.0.0
+ospf 1
+default-route-advertise  //不建议always
+
+stub(自动产生3lsa)
+
+nssa(area0无full邻居)
+nssa default-route-advertise  //不建议always
+
+
+totally nssa(自动产生3lsa)
+
+
+
+
+(6)
+接口发送的lsa过滤
+ospf filter-lsa-out all  
+ospf filter-lsa-out summary   #3
+ospf filter-lsa-out ase      #5
+ospf filter-lsa-out nssa      #7
+
+三类lsa过滤 
+ospf 
+area 1
+filter ip-prefix name import     #
+filter ip-prefix name export     #注入到其他区域
+
+
+
+(7)
+报文认证(两端要配置相同key，同一区域都要认证) 
+int 
+ospf authentication-mode simple password
+ospf authentication-mode md5 key id
+
+
+(8)
+多进程间的路由信息操作
+同一个路由不同的ospf进程之间路由信息不回交换
+用import ospf 2导入路由

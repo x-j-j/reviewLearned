@@ -1,0 +1,67 @@
+------rip------
+RIPv1
+1.rip
+2.internet 10.0.0.0
+
+RIPv2
+1.rip
+2.internet 10.0.0.0
+3.version 2
+
+监视rip协议
+debugging rip 1 
+terminal debugging
+terminal monitor        //或者debug all
+
+
+------ripv2认证------
+两个接口配置简单验证密码
+int g0/0/1
+rip authentication-mode simple huawei
+md5验证
+rip authentication-mode md5 usual huawei
+
+--汇总--
+1.ripv1自动
+2.ripv2 summary always后自动
+undo summary  //v2关闭自动汇总
+rip summary-address 10.1.0.0 23 //手动汇总
+
+---v1v2---
+默认接受v1和v2，但是发送v1
+v2可以识别v1，v1不能识别v2
+rip version2 broadcast/multicast
+
+--定时器--
+停止路由更新undo rip output
+改变计时器 timers rip 20 120 60
+
+--抑制发送更新报文--
+1.silent-interface e1/0/1
+2.undo rip output(某一接口上)
+--单播发送更新报文--
+peer + 发送目的地的接口网卡地址
+
+--不连续子网--
+??
+ripv1 给中间的所有路由器配置第二个ip  ip addr 10.1.1.1 sub
+ripv2 关闭自动汇总
+
+--水平分割,触发更新,毒性逆转--
+触发更新:当直连链路断掉时立刻发送更新
+水平分割:从某个接口收到的包的网段,不出现在这个接口发出的路由更新中
+毒性逆转:从某个接口收到的包的网段,从本接口发送的时候cost设置为16
+
+
+--更改路由路径(路由附加度量值)--
+rip metricin 2
+某一接收口配置的cost变大，接收的优先级变小
+rip metricout 2
+某一发送口配置的cost变大，接收方收到对应的包优先级变小
+
+
+---rip故障处理---
+???
+---路由引入---
+imoprt-route direct
+???

@@ -1,0 +1,54 @@
+VLAN
+
+---access----
+创建vlan
+vlan 10
+vlan 20
+
+vlan batch 30 40
+dis vlan
+int e0/0/1
+port link-type access
+port default vlan 10
+
+undo vlan batch 30 40   //删除vlan
+
+---trunk---
+int e0/0/1
+port link-type trunk
+port trunk allow-pass vlan 10 20 //port trunk allow-pass vlan all
+dis port vlan
+
+---hybrid---                    //更灵活
+vlan 10
+vlan 20
+int e0/0/1
+port hybrid untagged vlan 10 30   //配置拆tag种类
+port hybrid pvid 10               //配置封装tag种类
+int e0/0/2
+port hybrid untagged vlan 20 30   //配置拆tag种类
+port hybrid pvid 10               //配置封装tag种类
+int e0/0/3
+port hybrid tagged vlan 10 20 30  //链路配置
+
+
+---多臂路由器---
+路由器配置
+int g0/0/1.1
+ip address 192.168.1.254 24
+dot1q terminal vid 10   //对经过路由器的带有tag的帧剥离，转发，封装tag
+arp broadcast enable    //开启arp广播功能
+
+display ip interface brief  //接口和ip状态关系
+display ip routing-table    //路由表
+
+tracert 192.168.2.1         //查看包经过的路径
+
+
+---三层交换机---
+额外配置
+int VLANif 10
+ip address 192.168.1.254 24
+int VLANif 20
+ip address 192.168.2.254 24
+

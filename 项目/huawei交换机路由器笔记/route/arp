@@ -1,0 +1,16 @@
+配置全双工和接口速率
+int g0/0/0
+undo negotiation auto  /关掉自动协商功能
+duplex full   //开启全双工
+
+---ARP---
+查看arp
+dis arp all
+sys
+arp static 10.1.1.1 1234-2345-3456
+undo arp static 10.1.1.1 1234-2345-3456  //取消
+
+代理arp
+对于没有配置缺省网关的设备，路由器进行代替arp转发功能
+int g0/0/0
+arp-proxy enable

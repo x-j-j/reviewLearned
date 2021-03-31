@@ -1,0 +1,38 @@
+1.代理防火墙
+对于经过防火墙的所有上层应用进行检测，如果应用中出现不合法的词汇，则过滤掉，但是网络层检测缺乏
+2.包过滤防火墙
+一二三四层检测和过滤
+3.状态检测防火墙
+对端口开放问题比包过滤更加细致
+所有发出的包建立会话，当接收数据包时匹配会话，丢包或者动态的开放端口
+同时有会话超时
+
+防火墙硬件平台
+intel x86 asic np 多核
+
+trust
+untrust
+local:抵达防火墙或者从防火墙发出的
+dmz:通常放置服务器或者vpn
+但是防火墙默认阻止全部数据包,除了一些管理协议(telnet)
+新防火墙没有安全级别认证,但是也要知道
+
+
+防火墙组网方式
+二层接入
+不进行路由寻址，只过滤
+三层接入
+网和外网之间
+加入路由寻址，nat，utm等
+
+代码
+firewall zone trust
+add int g0/0/0
+
+查看安全策略
+dis f s t (display firewall session table)
+
+配置允许的功能
+int g0/0/1
+service-manage http permit
+service-manage ping permit

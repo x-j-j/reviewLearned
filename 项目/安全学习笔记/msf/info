@@ -1,0 +1,73 @@
+cracer@www ~ » sudo nmap -sV 10.10.10.129
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-12-01 07:02 EST
+Nmap scan report for 10.10.10.129
+Host is up (0.0021s latency).
+Not shown: 992 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 2.2.2
+22/tcp   open  ssh         OpenSSH 5.3p1 Debian 3ubuntu4 (Ubuntu Linux; protocol 2.0)
+80/tcp   open  http        Apache httpd 2.2.14 ((Ubuntu) mod_mono/2.4.3 PHP/5.3.2-1ubuntu4.5 with Suhosin-Patch mod_python/3.3.1 Python/2.6.5 mod_perl/2.0.4 Perl/v5.10.1)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp  open  imap        Courier Imapd (released 2008)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+5001/tcp open  java-object Java Object Serialization
+8080/tcp open  http        Apache Tomcat/Coyote JSP engine 1.1
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port5001-TCP:V=7.80%I=7%D=12/1%Time=5FC630EF%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,4,"\xac\xed\0\x05");
+MAC Address: 00:0C:29:C5:A6:2B (VMware)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+
+
+
+cracer@www ~ » sudo nmap -sV 10.10.10.130
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-12-01 06:59 EST
+Nmap scan report for 10.10.10.130
+Host is up (0.00093s latency).
+Not shown: 985 closed ports
+PORT     STATE SERVICE         VERSION
+21/tcp   open  ftp             Microsoft ftpd
+80/tcp   open  http            Microsoft IIS httpd 6.0
+135/tcp  open  msrpc           Microsoft Windows RPC
+139/tcp  open  netbios-ssn     Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds    Microsoft Windows 2003 or 2008 microsoft-ds
+777/tcp  open  multiling-http?
+1025/tcp open  msrpc           Microsoft Windows RPC
+1026/tcp open  msrpc           Microsoft Windows RPC
+1030/tcp open  msrpc           Microsoft Windows RPC
+1031/tcp open  msrpc           Microsoft Windows RPC
+1521/tcp open  oracle-tns      Oracle TNS Listener 10.2.0.1.0 (for 32-bit Windows)
+6002/tcp open  http            SafeNet Sentinel Protection Server 7.3
+7001/tcp open  afs3-callback?
+7002/tcp open  http            SafeNet Sentinel Keys License Monitor httpd 1.0 (Java Console)
+8099/tcp open  http            Microsoft IIS httpd 6.0
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port777-TCP:V=7.80%I=7%D=12/1%Time=5FC6304D%P=x86_64-pc-linux-gnu%r(Ter
+SF:minalServerCookie,A,"\x01\0\t\xe0\x06\x01\0\t\xe0\x06")%r(Kerberos,5,"\
+SF:x01\0\t\xe0\x06")%r(SMBProgNeg,5,"\x01\0\t\xe0\x06")%r(TerminalServer,A
+SF:,"\x01\0\t\xe0\x06\x01\0\t\xe0\x06")%r(WMSRequest,5,"\x01\0\t\xe0\x06");
+MAC Address: 00:0C:29:09:18:C6 (VMware)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_server_2003
+
+
+cracer@www ~ » sudo nmap -sV 10.10.10.254
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-12-01 06:58 EST
+Nmap scan report for 10.10.10.254
+Host is up (0.0015s latency).
+Not shown: 988 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         ProFTPD 1.3.1
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+23/tcp   open  telnet      Linux telnetd
+25/tcp   open  smtp        Postfix smtpd
+53/tcp   open  domain      ISC BIND 9.4.2
+80/tcp   open  http        Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+3306/tcp open  mysql       MySQL 5.0.51a-3ubuntu5
+5432/tcp open  postgresql  PostgreSQL DB 8.3.0 - 8.3.7
+8009/tcp open  ajp13       Apache Jserv (Protocol v1.3)
+8180/tcp open  http        Apache Tomcat/Coyote JSP engine 1.1
+MAC Address: 00:50:56:E7:EF:A8 (VMware)
+Service Info: Host:  metasploitable.localdomain; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel

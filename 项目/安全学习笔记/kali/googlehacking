@@ -1,0 +1,93 @@
+1.shodan
+https://www.shodan.io
+入侵你的设备
+net:8.8.8.8
+net:8.8.8.8/24
+country:"US"
+city:"beijing"
+port
+os:"windows"
+hostname:"baidu.com"
+server:"apache"
+user:"admin" pass:"password"
+
+linux upnp avtech
+家用
+http://96.9.73.217:8081
+
+webcamXP
+家用
+http://185.8.234.46:80
+
+JAWS/1.0
+公共街道
+http://1.26.101.164:60001
+http://88.3.233.193:8080
+http://2.82.122.123:8080
+http://113.111.185.121:10000
+
+netbotz appliance
+
+Basic realm="IP Camera" country:CN
+
+Server:uc-httpd 1.0.0 200 OK country:"CN"
+
+
+2.google
++支付 -充值
+支付 充值    						//搜索含有支付或者含有充值或者含有二者
+" 支付 充值"  						//必须包含" 支付 充值"完整字符串的部分
+intitle:电子商务 intext:法人 intext:电话
+site:alibaba  inurl:contact
+SOX filetype:pdf
+intext:"cgi-bin/guestimage.html"
+
+实例
+inurl:"level/15/exec/~/show"
+intitle:"netbotz appliance" "ok"
+inurl:/admin/login.php
+inurl:qq.txt
+filetype:xls "username | password"
+inurl:ftp "password" filetype:xls site:baidu.com
+inurl:Service.pwd
+
+3.yandex
+www.yandex.com
+
+4.theHarvester
+proxychars有点复杂没整还要用tor
+theHarvester -d 163.com -l 200 -b google
+-d dns
+-l 限制搜索数量
+-b 搜索引擎
+
+5.metagoofil//没有
+只通过谷歌搜索
+proxychains metagoofil -d microsoft.com -t pdf -l 500 -o test -f 1.html
+搜索microfoft.com
+pdf类型
+500个
+存储在test目录下
+-f 不知道干啥的
+
+6.maltego
+没注册不让用
+不会注册
+拉到
+被动收集起他途径
+.社交⺴络
+.⼯商注册
+.新闻组 / 论坛
+.招聘⺴站
+
+
+其他工具
+.http://www.archive.org/web/web.php
+这个网站爬到全世界400多亿所有的网页
+
+暗网网址集合
+https://thehiddenwiki.org/
+https://uzzz.org/2018/08/29/5f76d7216ee1be2fefb2881d5ef55578.htm
+
+kali官方的漏洞报告平台
+https://www.exploit-db.com

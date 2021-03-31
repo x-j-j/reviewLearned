@@ -1,0 +1,19 @@
+表单的暴力破解
+1.随便填一个然后从burp中Proxy的HTTP history中找到右键发到Intruder
+2.选择Attack type
+ Sniper(狙击手)一个字典替换单独替换多个位置
+ Battering ram(撞车)一个字典同时替换多个位置
+ Pitchfork(草叉)多个字典位置对应
+ Cluster bomb(聚焦炸弹)多个字典笛卡尔乘积
+3.clear或者add替换位置
+4.修改payload 
+ payload type:Runtine file
+5.(可选)Options中Grep-Match
+
+绕过前端验证码(后台无验证)
+1.通过burp中repeater测试
+2.测试成功(不填验证码可以通过)后进行暴力破解
+
+验证码没设时间限制
+刷新页面后尝试多次通过burp发送请求，无验证码错误后
+可以暴力破解

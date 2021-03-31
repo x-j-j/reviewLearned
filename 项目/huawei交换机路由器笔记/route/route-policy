@@ -1,0 +1,25 @@
+1.route-policy工具
+配置acl
+(1)acl
+acl 2000
+rule permit source 172.16.1.0 0.0.0.0
+
+使用route-policy
+route-policy RP permit node 10
+if-match acl 2000
+apply cost 10
+
+ospf 1
+import-route direct route-policy RP
+
+(2)ip-prefix
+ip-prefix(在过滤相同网络号不同淹码的包时使用)
+ip ip-prefix deny name 192.168.0.0 24 
+ip ip-prefix permit 0.0.0.0 0 less-equal 32 //permit any
+route-policy name permit node 10
+if-match ip-prefix name
+
+2.filter-policy(对入和出进行过滤,但是不过滤lsa,只是在lsdb转化为路由表时过滤)
+filter-policy ip-prefix export direct(直连方式导入的路由转发时过滤掉)
+filter-policy ip-prefix export ospf(ospf方式导入的路由转发时过滤掉)
+filter-policy ip-prefix import ospf(ospf方式导入的路由过滤掉)

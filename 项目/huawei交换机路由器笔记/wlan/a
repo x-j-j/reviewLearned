@@ -1,0 +1,37 @@
+------------
+1,2
+wlan:10~100
+BSA:整个区域
+ESS:多个BSS串联
+SSID:xjjWiFi的名称
+BSSID:xjjWiFi的Mac地址
+
+independent BSS
+  pc
+ /  \
+pc--pc
+infrastructure BSS
+  ap
+ /  \
+pc  pc
+
+一个ap可以有多个ssid,bssid，多个ap可以有相同ssid,bssid
+
+-------------
+3拓扑
+见wlan拓扑结构ppt
+
+Ad-Hoc(pc对pc,win7,热点)
+    实验--win7添加临时网络
+    实验--配置无线路由器(回家弄)
+*IBSS
+WDS(无线当成有线)
+MESH
+
+------------
+4
+无线频谱
+
+无线射频工作原理特性
+------------
+ISM频段

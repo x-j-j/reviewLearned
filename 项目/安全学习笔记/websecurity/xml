@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diary>
+	<category>
+		kind_of_person;
+	</category>
+	<hate>
+		xiaoyinai;
+		liugudezhangfu;
+	</hate>
+	<normal>
+		&quot;xjj&quot
+		<!--"xjj"-->
+		&apos;xjj&apos;
+		<!--'xjj'-->
+		a&amp;b
+		<!--a&b-->
+		a&lt;b
+		<!--a<b-->
+		b&gt;a
+		<!--b>a-->
+	</normal>
+	<like>
+		<friends>
+			<property>
+				need trust;
+			</property>
+		</friends>
+		<brother>
+			xiaoge;
+		</brother>
+	</like>
+	<love>
+		<parents>
+			mother;
+			father;
+		</parents>
+		<grands>
+			grandparents;
+		</grands>
+		<girlfriend>
+		</girlfriend>
+	</love>
+	<forever>
+		she;
+	</forever>
+</diary>
+

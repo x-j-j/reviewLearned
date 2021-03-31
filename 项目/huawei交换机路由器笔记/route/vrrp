@@ -1,0 +1,13 @@
+int g0/0/0
+ip addr 192.168.1.253 24(都一样)
+vrrp vrid 1 virtual-ip 192.168.1.254(都一样)
+vrrp vrid 1 priority 120
+vrrp vrid 1 prempt-mode timer delay 20
+
+track接口状态
+vrrp vrid 1 track int g0/0/1 reduced 30(接口down后接口优先级减少30)
+
+vrrp与bfd联动
+
+多组vrrp实现负载均衡
+同一个路由器多vlan多vrrp组

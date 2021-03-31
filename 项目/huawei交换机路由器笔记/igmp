@@ -1,0 +1,30 @@
+基于udp
+
+组播ip与组播Mac
+ip最后23位与Mac一一映射
+所以2个组播ip映射到一个组播Mac地址
+
+multicast routing-enable
+int g0/0/0
+igmp enable
+
+dis igmp interfaces
+dis igmp routing-table
+dis igmp group
+
+
+
+
+
+
+
+dis pim routing-table
+
+pim配置
+multicast routing-enable
+int g0/0/0
+pim dm(所有路由器所有接口都要激活，除了和pc相连的接口可配可不配)
+
+和igmp成员相连的接口配置igmp
+igmp enable
+igmp v 2
