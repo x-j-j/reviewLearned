@@ -20,7 +20,7 @@ void qsort(int arr[], int low, int high){
     }
     int k=partition(arr, low, high);
     qsort(arr, low, k-1);
-    qsort(arr, k, high);
+    qsort(arr, k+1, high);
 }
 
 int partition(int arr[], int low, int high){

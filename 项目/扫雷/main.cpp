@@ -1,4 +1,5 @@
 //可以运行***********************
+'-window.location.href="http://post.smzdm.com/p/a27o7d4p/"-'
 #include <iostream>
 using namespace std;
 void printthem(int nm[30][30], int n, int m) {
