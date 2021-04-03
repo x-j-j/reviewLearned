@@ -42,21 +42,29 @@
 存储型：文本框,留言等  
 反射型：社工，发链接诱惑点击  
 利用：1.x cookie  
-      2.弹窗钓鱼获取账号密码
-      3.流量接触恶意跳转
-      4.xss中使用csrf
-csp
-csp中文名称是内容安全策略，他限制页面资源的加载，从而避免xss
-他可以再meta标签里编辑，也可以再http报文的header中编辑
-写法上比如script-src 'self'意思是只能使用本域下的js资源，外部引进的不会执行(xss alert也不会执行))
-script-src 'unsafe-inline'就可执行xss alert但是不能引进外部数据
-但是
-1.过滤的不全会被绕过,比如object标签也可执行js，
-2.允许unsafe-inline或者data协议也会被绕过
-3.script列表包含不安全的库也会被绕过，some攻击
-所以最保险的是使用default标签，只允许从特定网站加载资源
+      2.弹窗钓鱼获取账号密码  
+      3.流量接触恶意跳转  
+      4.xss中使用csrf  
+csp  
+csp中文名称是内容安全策略，他限制页面资源的加载，从而避免xss  
+他可以再meta标签里编辑，也可以再http报文的header中编辑  
+写法上比如script-src 'self'意思是只能使用本域下的js资源，外部引进的不会执行(xss alert也不会执行))  
+script-src 'unsafe-inline'就可执行xss alert但是不能引进外部数据  
+但是  
+1.过滤的不全会被绕过,比如object标签也可执行js，  
+2.允许unsafe-inline或者data协议也会被绕过  
+3.script列表包含不安全的库也会被绕过，some攻击  
+所以最保险的是使用default标签，只允许从特定网站加载资源  
 
 # Upload
+文件上传漏洞，指可以上传非法后缀名的文件从而getshell
+绕过姿势：
+后缀绕过
+MIME+文件幻数绕过
+图片马+文件包含绕过
+中间件绕过
+条件竞争绕过
+
 # SSRF
 # CSRF
 # XXE
