@@ -6,7 +6,7 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 
 if len(sys.argv) != 4:
-	print("you need only one para suck as 122.122.122.1 53 100")
+    print("you need only one para suck as 122.122.122.1 53 100")
 addr = sys.argv[1]
 begin = int(sys.argv[2])
 end = int(sys.argv[3])
