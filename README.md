@@ -185,6 +185,7 @@ CRLF: 配置
 进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。
 
 ## 快排
+`
 void quickSort(int arr[], int low, int high){
     qsort(arr, low, high);
 }
@@ -206,11 +207,13 @@ int partition(int arr[], int low, int high){
     arr[low] = k;
     return low;
 }
+`
 
 
 
 
 ## 归并排序
+`
 void mergeSort(int arr[]){
     int * temp = new int[arr.length];
     internalMergeSort(arr, tmp, 0, arr.length-1);
@@ -240,3 +243,4 @@ void merge(int[] arr, int[] tmp, int left, int middle, int right){
         arr[left + i] = tmp[i];
     }
 }
+`
