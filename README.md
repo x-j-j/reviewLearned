@@ -35,6 +35,24 @@
     addslashes()  
     PDO  
 
+# waf绕过
+waf中文名称是web应用防火墙分为硬件防火墙，软件防火墙，云防火墙
+1.函数过滤替换(首先爆破观察那种函数可使用再进行重组替换)
+select mid(user(),1,2);  =>  select substr(user() from 1 for 2);  =>  replace(LPAD(user(),2,1),LPAD(user(),2-1,1),"");
+ord => conv(hex(),16,10);
+2.逗号过滤绕过(fromfor, offset, join)
+`select mid(user() from 1 for 2);`  
+`if(,,) => case when`  
+`select 1,2  =>  select * from (select 1)a join (select 2)b;`  
+`limit 2,1  =>  limit 1 offset 2;`  
+3.空格过滤绕过(注释，括号)  
+`select/**/1/**/from/**/1;`    
+`select(user());`  
+4.引号过滤绕过(16进制)  
+引号中的内容用16进制表示
+5.大小写，双写
+6.=过滤绕过
+between 1 and 1等价于1
 
 
 # XSS  
@@ -76,6 +94,12 @@ ssrf(server-side resource forgray)的中文名称是服务端请求伪造,他是
 csrf的中文名称是跨站请求伪造。他原理就是盗用你的身份，发送恶意请求
 道理都懂
 反射型xss和csrf的区别：xss是盗取受害者的cookie，csrf是利用受害者直接完成相应操作
+
+csrf防护，Token的位置: 首先不能放到cookie中。接着a或者form标签隐藏token(js动态的从服务端获取)
+token绕过：
+1.执行目标网站的js获取token
+2.点击劫持(目标网站在顶层隐藏，底层显示其他信息诱惑用户点击)
+3.更改请求方法
 
 
 # XXE  
@@ -168,12 +192,7 @@ CRLF: 配置
 线程安全
 
 
-# 算法数据结构
-1.数组与链表的优缺点
-数组随机访问性强，占用内存小
-链表增删改强
 
-# waf绕过
 
 # python语言特性
 1.cpython中的gil
@@ -183,6 +202,25 @@ CRLF: 配置
 
 2.从操作系统层面讲进程与线程区别
 进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。
+
+3.线程安全
+dict线程安全,原子操作
+Queue线程安全
+list有些操作不安全
+根本原因是字节码操作是只有一条还是多条
+
+4.线程间的通信
+Event
+Condition
+Queue
+
+
+
+# 算法数据结构
+1.数组与链表的优缺点
+数组随机访问性强，占用内存小
+链表增删改强
+
 
 ## 快排
 `
@@ -208,10 +246,6 @@ int partition(int arr[], int low, int high){
     return low;
 }
 `
-
-
-
-
 ## 归并排序
 `
 void mergeSort(int arr[]){
@@ -244,3 +278,8 @@ void merge(int[] arr, int[] tmp, int left, int middle, int right){
     }
 }
 `
+
+
+# 问面试官的问题
+1.我这个岗位以后的工作内容大概是什么，对于能力提升和知识获取帮助大吗
+2.web安全前景好吗，会在几年后饱和吗，所有的安全里面那个前景是最好的。
